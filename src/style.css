@@ -1,7 +1,62 @@
 body {
     background-color: rgb(77, 77, 77);
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0%;
 }
 
 form {
     color: white;
+}
+/* Left Side CSS */
+.left-box {
+    width: 30%;
+    background-color: rgb(128, 128, 128);
+    height: 100vh;
+}
+.box__container {
+    height: 40%;
+    background-color: aqua;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    padding: 10px;
+
+}
+
+.box__item {
+    border: 1px solid red;
+    height: 45%;
+    width: 45%;
+    margin: 3px;
+}
+
+.list-view {
+    height: 50%;
+    border: 1px solid red;
+}
+
+
+/* Right side css */
+.right-box {
+    width: 70%;
+    background-color: rgb(48, 48, 48);
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.todo-view {
+    height: 85%;
+    width: auto;
+    border: 1px solid red;
 }
