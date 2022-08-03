@@ -7,14 +7,14 @@ class Display{
     loadBody(){
          
     }
-
+    //creates a the form needed from todo
     form(){
         let inputArray = ['title','description','dueDate','priority','list'];
         
         const form = document.createElement('form');
         form.setAttribute('id','todo-form');
         document.body.append(form);
-        
+        //each element displays different inputs based on their needed data.
         for (let i = 0; i < inputArray.length; i++) {
             const element = inputArray[i];
             if (element == "title") {
@@ -44,18 +44,19 @@ class Display{
                 label.setAttribute('for','due-date');
                 label.textContent = 'Due Date:';
                 let input = document.createElement('input');
-                input.setAttribute('type','text')
+                input.setAttribute('type','datetime-local')
                 input.setAttribute('id','due-date')
                 input.setAttribute('name','due-date');
                 form.appendChild(label);
                 form.appendChild(input);
             }
+            //change this to radio with 3 priority options low med high
             if (element == "priority") {
                 let label = document.createElement('label');
                 label.setAttribute('for','priority');
                 label.textContent = 'Priority:';
                 let input = document.createElement('input');
-                input.setAttribute('type','text')
+                input.setAttribute('type','radio')
                 input.setAttribute('id','priority')
                 input.setAttribute('name','priority');
                 form.appendChild(label);
