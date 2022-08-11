@@ -1,18 +1,17 @@
-import { sub } from "date-fns";
 import {Conductor} from "./todoDataConductor";
-
+import {listArray} from "./listArrayTracker";
 class Display {
 	constructor() {}
 
 	loadBody() {}
 	//creates a the form needed from todo
-	form() {
+	todoForm() {
 		let inputArray = ["title", "description", "dueDate", "priority", "list"];
 
 		const form = document.createElement("form");
 		form.setAttribute("onsubmit", "return false");
 		form.setAttribute("id", "todo-form");
-		const todoView = document.querySelector(".todo-view");
+		const todoView = document.querySelector(".box__container");
 		todoView.appendChild(form);
 		//each element displays different inputs based on their needed data.
 		for (let i = 0; i < inputArray.length; i++) {
@@ -79,12 +78,25 @@ class Display {
 				let label = document.createElement("label");
 				label.setAttribute("for", "List");
 				label.textContent = "List:";
-				let input = document.createElement("input");
-				input.setAttribute("type", "text");
-				input.setAttribute("id", "list");
-				input.setAttribute("name", "list");
+				let select = document.createElement("select");
+				select.setAttribute("id", "list");
+				select.setAttribute("name", "list");
 				form.appendChild(label);
-				form.appendChild(input);
+				form.appendChild(select);
+				
+				for (let i = 0; i < listArray.length; i++) {
+					console.log('list title');
+					console.log(listArray[i].title);
+					console.log('Hey!')
+					//grabs created Lists and inputs them into the list selection options drop down.
+					const element = listArray[i].title;
+					const option = document.createElement('option');
+					option.setAttribute('value','test');
+					let capitalizedList = listArray[i].title.charAt(0).toUpperCase() + listArray[0].title.slice(1);
+					option.textContent = capitalizedList;
+					select.append(option);
+					
+				}
 			}
 		}
 
@@ -93,6 +105,14 @@ class Display {
 		submit.setAttribute("value", "Submit");
         submit.setAttribute('id','todo-form-btn')
 		form.appendChild(submit);
+	}
+
+	formReset() {
+		document.getElementById("todo-form").reset();
+	}
+
+	displayTodo(){
+
 	}
 }
 export { Display };
