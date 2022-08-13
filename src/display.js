@@ -92,7 +92,7 @@ class Display {
 					const element = listArray[i].title;
 					const option = document.createElement('option');
 					option.setAttribute('value','test');
-					let capitalizedList = listArray[i].title.charAt(0).toUpperCase() + listArray[0].title.slice(1);
+					const capitalizedList = listArray[i].title.charAt(0).toUpperCase() + listArray[i].title.slice(1);
 					option.textContent = capitalizedList;
 					select.append(option);
 					
