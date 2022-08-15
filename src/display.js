@@ -68,7 +68,7 @@ class Display {
 					input.setAttribute("type", "radio");
 					input.setAttribute("id", element);
 					input.setAttribute("name", "priority");
-                    input.setAttribute("value",element)
+                    input.setAttribute("value",element);
 
 					form.appendChild(input);
 					form.appendChild(label);
@@ -91,7 +91,8 @@ class Display {
 					//grabs created Lists and inputs them into the list selection options drop down.
 					const element = listArray[i].title;
 					const option = document.createElement('option');
-					option.setAttribute('value','test');
+					option.setAttribute('value',listArray[i].title);
+					option.setAttribute('class','list-value')
 					const capitalizedList = listArray[i].title.charAt(0).toUpperCase() + listArray[i].title.slice(1);
 					option.textContent = capitalizedList;
 					select.append(option);
