@@ -1,33 +1,34 @@
-import {Todo} from "./createToDo";
-
+import { Todo } from "./createToDo";
+import { listArray } from "./listArrayTracker";
+import { Display } from "./display";
+import { List } from "./createList";
 class Conductor {
-	
 	constructor() {
-		this.todoData = [];//I want to access this array in method.
+		this.todoData = []; //I want to access this array in method.
 		this.list;
 	}
 
 	grabFormData() {
 		const todoFormBtn = document.querySelector("#todo-form-btn");
 
-        let arrayData = this;
+		let arrayData = this;
 
 		todoFormBtn.addEventListener("click", () => {
 			const title = document.getElementById("title").value;
 			const description = document.getElementById("description").value;
 			const dueDate = document.getElementById("due-date").value;
-			let priority;				
-			var ele = document.getElementsByName('priority');
-				  
-				for(let i = 0; i < ele.length; i++) {
-					if(ele[i].checked){
-					priority = ele[i].value;	
+			let priority;
+			var ele = document.getElementsByName("priority");
+
+			for (let i = 0; i < ele.length; i++) {
+				if (ele[i].checked) {
+					priority = ele[i].value;
 				}
 			}
 			const list = document.getElementById("list").value;
 
 			//create todoObj
-			const todoObj = new Todo(title,description,dueDate,priority);
+			const todoObj = new Todo(title, description, dueDate, priority);
 
 			//Pushes todo to array
 			arrayData.todoData.push(todoObj);
@@ -35,18 +36,58 @@ class Conductor {
 		});
 	}
 
-	returnArray() {
-		console.log(this.todoData);
-	}
-
 	pushToList(list) {
-		let todoDataLen = this.todoData.length
-		list.add(this.todoData[todoDataLen-1]);
+		let todoDataLen = this.todoData.length;
+		list.add(this.todoData[todoDataLen - 1]);
 	}
 
-	returnList() {	
+	returnList() {
 		return this.list;
-	} 
+	}
 
+	insertTodoIntoList() {
+		let conductor = this;
+		let display = new Display();
+		//Grabs data from
+		//Grabs form data and inserts it into the selected List
+		let formBtn = document.getElementById("todo-form-btn");
+		
+		conductor.grabFormData();
+		
+		formBtn.addEventListener("click", function () {
+			//TODO: Create code that grabs selected list and inserts into that list.
+			let lists = document.getElementById("list");
+			let collection = lists.selectedOptions;
+
+			let selectedList = collection[0].label;
+			console.log(selectedList);
+
+			//Inserts data to selected list when submitted.
+			for (let index = 0; index < listArray.length; index++) {
+				const list = listArray[index];
+				if (list.title == selectedList) {
+					conductor.pushToList(listArray[index]);
+					console.log(listArray);
+				} else {
+					console.log("Code exit 1");
+				}
+			}
+
+			display.formReset();
+			console.log(listArray);
+		});
+	}
+
+	createNewList() {
+		let listBtn = document.getElementById("list-form-btn");
+		
+		listBtn.addEventListener('click',()=>{
+			let listInput = document.getElementById('new-list').value;
+			const newList = new List(listInput);
+			listArray.push(newList);
+			console.log(listArray);
+		})
+
+	}
 }
 export { Conductor };

@@ -1,56 +1,31 @@
 import {List} from "./createList"
-import {Todo} from "./createToDo.js"
 import {Display} from "./display"
 import {Conductor} from './todoDataConductor';
 //Holds created arrays
 import {listArray} from "./listArrayTracker.js";
-import { setWeek } from "date-fns";
 
 
+//Dom controller
 let display = new Display();
+//Data Manipulator
 let dataCond = new Conductor();
+//Lists 
+//TODO make this automatic.....
+//DEFAULT CREATED LIST
 let capture = new List('Capture');
-let nextActions = new List('Next actions');
-let waitingOn = new List('Hector');
 listArray.push(capture);
+let nextActions = new List('Next actions');
 listArray.push(nextActions);
+let waitingOn = new List('Hector');
 listArray.push(waitingOn);
-console.log(listArray);
-console.log(listArray[0]);
+
+
+
+//TODO^^^^^^^^^^^^^^^^^^^^
 //Loads form
 display.todoForm();
-//Grabs data from form
+display.listForm();
 
-//Grabs form data and inserts it into the selected List
-let formBtn = document.getElementById('todo-form-btn');
-dataCond.grabFormData();
-formBtn.addEventListener('click',function(){
-    
-    //TODO: Create code that grabs selected list and inserts into that list.
-    let lists = document.getElementById('list');
-    let collection = lists.selectedOptions; 
-    
-    let selectedList = collection[0].label;
-    console.log(selectedList);
-    
-    
-    //Inserts data to selected list when submitted.
-    for (let index = 0; index < listArray.length; index++) {
-        const list = listArray[index];
-        if (list.title == selectedList) {
-            dataCond.pushToList(listArray[index]);
-        } else {
-            console.log("something went wrong Ln44");
-        }
-        
-    }
-
-    
-    //i want to be bale to insert a variable above depending on the selected list so it goes to its correct list.
-    // console.log(capture);
-    display.formReset();
-    console.log(listArray);
-
-})
-
-
+//grabs todo data and inserts into list
+dataCond.insertTodoIntoList();
+dataCond.createNewList();

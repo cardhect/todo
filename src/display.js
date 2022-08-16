@@ -3,7 +3,7 @@ import {listArray} from "./listArrayTracker";
 class Display {
 	constructor() {}
 
-	loadBody() {}
+
 	//creates a the form needed from todo
 	todoForm() {
 		let inputArray = ["title", "description", "dueDate", "priority", "list"];
@@ -83,13 +83,12 @@ class Display {
 				select.setAttribute("name", "list");
 				form.appendChild(label);
 				form.appendChild(select);
-				
+			//TODO find out how to update these options when a new list gets created.
 				for (let i = 0; i < listArray.length; i++) {
-					console.log('list title');
-					console.log(listArray[i].title);
-					console.log('Hey!')
 					//grabs created Lists and inputs them into the list selection options drop down.
 					const element = listArray[i].title;
+					console.log('display.todoForm');
+					console.log(listArray);
 					const option = document.createElement('option');
 					option.setAttribute('value',listArray[i].title);
 					option.setAttribute('class','list-value')
@@ -106,6 +105,33 @@ class Display {
 		submit.setAttribute("value", "Submit");
         submit.setAttribute('id','todo-form-btn')
 		form.appendChild(submit);
+	}
+
+	listForm() {
+		const form = document.createElement("form");
+		form.setAttribute("onsubmit", "return false");
+		form.setAttribute("id", "list-form");
+		const listView = document.querySelector(".list__container");
+		listView.appendChild(form);
+
+			let label = document.createElement("label");
+				label.setAttribute("for", "new-list");
+				label.setAttribute("name", "new-list");
+				label.textContent = "List:";
+				let input = document.createElement("input");
+				input.setAttribute("type", "text");
+				input.setAttribute("id", "new-list");
+				input.setAttribute("name", "new-list");
+				form.appendChild(label);
+				form.appendChild(input);
+
+
+		const submit = document.createElement("input");
+		submit.setAttribute("type", "submit");
+		submit.setAttribute("value", "Submit");
+        submit.setAttribute('id','list-form-btn')
+		form.appendChild(submit);
+
 	}
 
 	formReset() {
