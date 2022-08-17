@@ -9,9 +9,6 @@ class List {
         this.todos.push(todo);
     }
 
-    addList(){
-
-    }
 
 }
 

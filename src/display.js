@@ -26,7 +26,7 @@ class Display {
 				input.setAttribute("name", "title");
 				form.appendChild(label);
 				form.appendChild(input);
-			}
+			   }
 			if (element == "description") {
 				let label = document.createElement("label");
 				label.setAttribute("for", "description");
@@ -97,6 +97,7 @@ class Display {
 					select.append(option);
 					
 				}
+
 			}
 		}
 
@@ -111,7 +112,7 @@ class Display {
 		const form = document.createElement("form");
 		form.setAttribute("onsubmit", "return false");
 		form.setAttribute("id", "list-form");
-		const listView = document.querySelector(".list__container");
+		const listView = document.querySelector(".add-list");
 		listView.appendChild(form);
 
 			let label = document.createElement("label");
@@ -138,8 +139,82 @@ class Display {
 		document.getElementById("todo-form").reset();
 	}
 
+	displayLists(){
+		//Displays default Capture list in list view.
+		const listView = document.querySelector('.list-view');
+		const captureList = listArray[0].title;
+		const defaultList = document.createElement('button');
+		defaultList.setAttribute('class','list-option');
+		defaultList.textContent = captureList;
+		listView.append(defaultList);
+
+		const listSubmit = document.getElementById('list-form-btn');
+		listSubmit.addEventListener('click',()=>{
+			let listArrayLen = listArray.length;
+			let newList = listArray[listArrayLen-1].title
+			const inputList = document.createElement('button');
+			inputList.setAttribute('class','list-option');
+			inputList.textContent = newList;
+			listView.append(inputList);
+			this.displaySelectedList();
+
+		})
+		
+	}
+
+	displaySelectedList() {
+
+			let listNodes = document.querySelectorAll('.list-option');
+			listNodes.forEach(function (listNodeEle,i) {
+				listNodes[i].addEventListener('click',()=>{
+					const selectedList = listNodes[i].textContent;
+					const listTitle = document.querySelector('.header__list-title');
+					listTitle.textContent = selectedList;
+					console.log('title updated');
+	
+					
+				})
+			})
+			
+		}
+	
+
 	displayTodo(){
 
+	}
+
+	displayTodoAmount() {
+		//TODO Needs to be reworked to display todo amount in currently selected List.
+		// console.log(listArray[0].todos.length);
+		const submit = document.getElementById('todo-form-btn');
+		let todoCounter = listArray[0].todos.length;
+		let counter = document.getElementById('header__todo-amount');
+		counter.textContent = todoCounter;
+
+		let listNodes = document.querySelectorAll('.list-option');
+		
+		for (let i = 0; i < listArray.length; i++) {
+			// const element = listArray[i];
+			listNodes[i].addEventListener('click',()=>{
+				
+				// if (todoCount > 0) {
+				// 	let counter = document.getElementById('header__todo-amount');
+				// 	counter.textContent = todoCount;
+				// }
+				const selectedList = document.querySelector('.header__list-title').textContent;
+			
+				// for (let i = 0; i < listArray.length; i++) {
+					const list = listArray[i];
+					const todoCount = list.todos.length;
+					if (selectedList == list.title ) {
+						console.log(todoCount)
+					} else {
+						console.log('List title does not match');
+					}
+				// }
+			})
+			
+		}
 	}
 }
 export { Display };

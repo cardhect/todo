@@ -14,10 +14,11 @@ let dataCond = new Conductor();
 //DEFAULT CREATED LIST
 let capture = new List('Capture');
 listArray.push(capture);
-let nextActions = new List('Next actions');
+let nextActions = new List('Next Actions');
 listArray.push(nextActions);
-let waitingOn = new List('Hector');
-listArray.push(waitingOn);
+let tickler = new List('Tickler');
+listArray.push(tickler);
+
 
 
 
@@ -29,3 +30,10 @@ display.listForm();
 //grabs todo data and inserts into list
 dataCond.insertTodoIntoList();
 dataCond.createNewList();
+display.formReset();
+
+display.displayLists();
+// display.displayTodoAmount();
+display.displaySelectedList();
+
+// console.log(listArray[0].title);

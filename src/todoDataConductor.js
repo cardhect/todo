@@ -79,13 +79,23 @@ class Conductor {
 	}
 
 	createNewList() {
+		let display = new Display();
 		let listBtn = document.getElementById("list-form-btn");
 		
 		listBtn.addEventListener('click',()=>{
 			let listInput = document.getElementById('new-list').value;
-			const newList = new List(listInput);
+			const capitalizedList = listInput.charAt(0).toUpperCase() + listInput.slice(1);
+			const newList = new List(capitalizedList);
 			listArray.push(newList);
+			display.formReset();
 			console.log(listArray);
+
+			const listOptions = document.getElementById('list');
+			const option = document.createElement('option');
+			option.setAttribute('value',listInput);
+			option.setAttribute('class','list-value')
+			option.textContent = capitalizedList;
+			listOptions.append(option);
 		})
 
 	}
