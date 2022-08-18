@@ -1,7 +1,9 @@
 import {Conductor} from "./todoDataConductor";
 import {listArray} from "./listArrayTracker";
 class Display {
-	constructor() {}
+	constructor() {
+		this.selectedList;
+	}
 
 
 	//creates a the form needed from todo
@@ -106,6 +108,12 @@ class Display {
 		submit.setAttribute("value", "Submit");
         submit.setAttribute('id','todo-form-btn')
 		form.appendChild(submit);
+		let submitBtn = document.getElementById('todo-form-btn');
+		let self = this;
+		submitBtn.addEventListener('click',()=>{
+			self.displayTodoAmount();
+			console.log('Hi:)')
+		})
 	}
 
 	listForm() {
@@ -163,7 +171,7 @@ class Display {
 	}
 
 	displaySelectedList() {
-
+			let self = this;
 			let listNodes = document.querySelectorAll('.list-option');
 			listNodes.forEach(function (listNodeEle,i) {
 				listNodes[i].addEventListener('click',()=>{
@@ -171,6 +179,8 @@ class Display {
 					const listTitle = document.querySelector('.header__list-title');
 					listTitle.textContent = selectedList;
 					console.log('title updated');
+					self.selectedList = selectedList;
+					self.displayTodoAmount();
 	
 					
 				})
@@ -184,37 +194,19 @@ class Display {
 	}
 
 	displayTodoAmount() {
-		//TODO Needs to be reworked to display todo amount in currently selected List.
-		// console.log(listArray[0].todos.length);
-		const submit = document.getElementById('todo-form-btn');
-		let todoCounter = listArray[0].todos.length;
-		let counter = document.getElementById('header__todo-amount');
-		counter.textContent = todoCounter;
-
-		let listNodes = document.querySelectorAll('.list-option');
-		
+		console.log(listArray[0].title);
 		for (let i = 0; i < listArray.length; i++) {
-			// const element = listArray[i];
-			listNodes[i].addEventListener('click',()=>{
-				
-				// if (todoCount > 0) {
-				// 	let counter = document.getElementById('header__todo-amount');
-				// 	counter.textContent = todoCount;
-				// }
-				const selectedList = document.querySelector('.header__list-title').textContent;
-			
-				// for (let i = 0; i < listArray.length; i++) {
-					const list = listArray[i];
-					const todoCount = list.todos.length;
-					if (selectedList == list.title ) {
-						console.log(todoCount)
-					} else {
-						console.log('List title does not match');
-					}
-				// }
-			})
+			const listTitle = listArray[i].title;
+			const listTodoLen = listArray[i].todos.length;
+			if (listTitle == this.selectedList) {
+				console.log(listTitle+ ' ' +this.selectedList + 'matches');
+				console.log(listTodoLen);
+				const counter = document.getElementById('header__todo-amount');
+				counter.textContent = listTodoLen;
+			}
 			
 		}
+
 	}
 }
 export { Display };

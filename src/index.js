@@ -14,10 +14,10 @@ let dataCond = new Conductor();
 //DEFAULT CREATED LIST
 let capture = new List('Capture');
 listArray.push(capture);
-let nextActions = new List('Next Actions');
-listArray.push(nextActions);
-let tickler = new List('Tickler');
-listArray.push(tickler);
+// let nextActions = new List('Next Actions');
+// listArray.push(nextActions);
+// let tickler = new List('Tickler');
+// listArray.push(tickler);
 
 
 
@@ -33,7 +33,5 @@ dataCond.createNewList();
 display.formReset();
 
 display.displayLists();
-// display.displayTodoAmount();
 display.displaySelectedList();
 
-// console.log(listArray[0].title);
