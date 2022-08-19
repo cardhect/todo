@@ -64,3 +64,20 @@ form {
     width: auto;
     border: 1px solid red;
 }
+
+.todo-obj {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: baseline;
+}
+.todo-title {
+
+}
+.todo-desc {
+
+}
+/* .todo-duedate
+.todo-priority */
+
+

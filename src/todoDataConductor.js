@@ -13,7 +13,7 @@ class Conductor {
 
 		let arrayData = this;
 
-		todoFormBtn.addEventListener("click", () => {
+		// todoFormBtn.addEventListener("click", () => {
 			const title = document.getElementById("title").value;
 			const description = document.getElementById("description").value;
 			const dueDate = document.getElementById("due-date").value;
@@ -33,7 +33,7 @@ class Conductor {
 			//Pushes todo to array
 			arrayData.todoData.push(todoObj);
 			arrayData.list = list;
-		});
+		// });
 	}
 
 	pushToList(list) {
@@ -54,7 +54,7 @@ class Conductor {
 		
 		conductor.grabFormData();
 		
-		formBtn.addEventListener("click", function () {
+		// formBtn.addEventListener("click", function () {
 			//TODO: Create code that grabs selected list and inserts into that list.
 			let lists = document.getElementById("list");
 			let collection = lists.selectedOptions;
@@ -75,7 +75,7 @@ class Conductor {
 
 			display.formReset();
 			console.log(listArray);
-		});
+		// });
 	}
 
 	createNewList() {

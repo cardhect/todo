@@ -28,7 +28,7 @@ display.todoForm();
 display.listForm();
 
 //grabs todo data and inserts into list
-dataCond.insertTodoIntoList();
+// dataCond.insertTodoIntoList();
 dataCond.createNewList();
 display.formReset();
 
