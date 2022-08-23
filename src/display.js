@@ -189,6 +189,7 @@ class Display {
 			".header__list-title"
 		).textContent;
 		const todoView = document.querySelector(".todo-view");
+		//!BUG var (i) resets to 0 each time function is called thus causing it to display the same array element when you insert another one
 		for (let i = 0; i < listArray.length; i++) {
 			// const element = listArray[i];
 			let listTitle = listArray[i].title;
@@ -218,6 +219,16 @@ class Display {
 				description.setAttribute('class','todo-items');
 				dueDate.setAttribute('class','todo-items');
 				priority.setAttribute('class','todo-items');
+
+
+				// let displayedTodos = document.querySelectorAll('.todo-obj');
+				
+				// //if grabbed title is the same as todo title do not display this todo. else display 
+				// if (displayedTodos.length > 0) {
+				// 	if (d) {
+						
+				// 	}
+				// 4}
 
 				todoContainer.append(title);
 				todoContainer.append(description);
