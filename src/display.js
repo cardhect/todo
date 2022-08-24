@@ -2,7 +2,7 @@ import { Conductor } from "./todoDataConductor";
 import { listArray } from "./listArrayTracker";
 class Display {
 	constructor() {
-		this.selectedList;
+		this.selectedList = 'Capture';
 	}
 
 	//creates a the form needed from todo
@@ -116,17 +116,20 @@ class Display {
 			// grabs the selected list in the options in the form
 			let lists = document.getElementById("list");
 			let collection = lists.selectedOptions;
-			let selectedList = collection[0].label;
+			
 
-			const currentList = document.querySelector(".header__list-title").textContent;
-			if (selectedList == currentList) {
+			const currentList = document.querySelector(
+				".header__list-title"
+			).textContent;
+			if (self.selectedList == currentList) {
+				self.clearTodoView();
 				self.displayTodo();
 				self.formReset();
-			}else{
-				console.log('not currently in correct list view');
+			} else {
+				console.log("not currently in correct list view");
 				self.formReset();
 			}
-			
+
 			console.log("Hi:)");
 		});
 	}
@@ -170,103 +173,117 @@ class Display {
 		listView.append(defaultList);
 
 		const listSubmit = document.getElementById("list-form-btn");
-		listSubmit.addEventListener("click", () => {
+		listSubmit.addEventListener("click", (event) => {
+			console.log(event);
 			let listArrayLen = listArray.length;
 			let newList = listArray[listArrayLen - 1].title;
 			const inputList = document.createElement("button");
 			inputList.setAttribute("class", "list-option");
 			inputList.textContent = newList;
 			listView.append(inputList);
-			this.displaySelectedList();
+
+			//Adding event listener to each list button that will run to display todos when clicked.
+			const listOptions = document.querySelectorAll(".list-option");
+
+			for (let index = 0; index < listOptions.length; index++) {
+				const element = listOptions[index];
+				console.log(element);
+
+				element.addEventListener("click", (e) => {
+					console.log("You clicked... me");
+					this.clearTodoView();
+					this.displaySelectedList(e);
+				});
+			}
 		});
 	}
 
-	displaySelectedList() {
-		let self = this;
-		let listNodes = document.querySelectorAll(".list-option");
-		listNodes.forEach(function (listNodeEle, i) {
-			listNodes[i].addEventListener("click", () => {
-				const selectedList = listNodes[i].textContent;
-				const listTitle = document.querySelector(".header__list-title");
-				listTitle.textContent = selectedList;
-				console.log("title updated");
-				self.selectedList = selectedList;
-				self.displayTodoAmount();
-				self.displayTodo();
-			});
-		});
+	displaySelectedList(e) {
+		console.log("displaySelectedList Ran");
+		console.log(this);
+		//the list that was clicked.
+
+		this.selectedList = e.target.innerText;
+		console.log('Selected List: ' + this.selectedList);
+	
+		const listTitle = document.querySelector(".header__list-title");
+		listTitle.textContent = this.selectedList;
+	
+		this.displayTodoAmount();
+		this.displayTodo();
 	}
 
 	displayTodo(listView) {
 		//curently will display todo title. figure out a way to only display todo once to avoid duplicates.
-		const currentList = document.querySelector(".header__list-title").textContent;
+		const currentList = document.querySelector(
+			".header__list-title"
+		).textContent;
 		const todoView = document.querySelector(".todo-view");
 		//!BUG var (i) resets to 0 each time function is called thus causing it to display the same array element when you insert another one
-		// if list is displayed in todoView
-		// check if selected list has todos
-		// if true display todos
-		console.log(listArray[0].todos.length);
-
-		// when capture is clicked
-		// check if it has todos
-		// if true
-		// display
+		
 		for (let i = 0; i < listArray.length; i++) {
-			console.log('list array len: ' + listArray.length);
+			console.log("list array len: " + listArray.length);
 			//listTitle is being used to hold value of the list title to check if it matches the selected list.
 			//! when new list is created and selected and new todo is inputed the todo is not being displayed because listTitle is refrencing 'capture' list due to i being 0. Find a way to grab what list was selected.
 			let listTitle = listArray[i].title;
-//! NOTE maybe create another for loop that cycles through the todos
-			if (currentList == listTitle && listArray[i].todos.length > 0) {
-				
-				const todoContainer = document.createElement("div");
+			//! NOTE maybe create another for loop that cycles through the todos
+			let listTodoLen = listArray[i].todos.length;
+			const currentList = listArray[i];
+			
+			
+			if (this.selectedList == listTitle && listTodoLen > 0) {
 
-				const title = document.createElement("h1");
-				const description = document.createElement("p");
-				const dueDate = document.createElement("p");
-				const priority = document.createElement("p");
-
-				//Adding todo details to elements
-				const todosLen = listArray[i].todos.length-1;
-				console.log(listArray[i].todos[todosLen].title);
-				console.log('this is the length');
-				console.log(listArray[i].todos.length);
-				//displays the last todo that was given.
-				console.log(listArray[i].todos[todosLen]);
-				
-				title.textContent = listArray[i].todos[todosLen].title;
-				description.textContent = listArray[i].todos[todosLen].description;
-				dueDate.textContent = listArray[i].todos[todosLen].dueDate;
-				priority.textContent = listArray[i].todos[todosLen].priority;
-
-				//Settings Attributes
-				todoContainer.setAttribute('class','todo-obj');
-				title.setAttribute('class','todo-title');
-				description.setAttribute('class','todo-desc');
-				dueDate.setAttribute('class','todo-duedate');
-				priority.setAttribute('class','todo-priority');
-
-				title.setAttribute('class','todo-items')
-				description.setAttribute('class','todo-items');
-				dueDate.setAttribute('class','todo-items');
-				priority.setAttribute('class','todo-items');
-
-
-				// let displayedTodos = document.querySelectorAll('.todo-obj');
-				
-				// //if grabbed title is the same as todo title do not display this todo. else display 
-				// if (displayedTodos.length > 0) {
-				// 	if (d) {
-						
-				// 	}
-				// 4}
-
-				todoContainer.append(title);
-				todoContainer.append(description);
-				todoContainer.append(dueDate);
-				todoContainer.append(priority);
-
-				todoView.append(todoContainer);
+				for (let j = 0; j < listTodoLen; j++) {
+					// const element = listArray.todos[index];
+					
+					const todoContainer = document.createElement("div");
+	
+					const title = document.createElement("h1");
+					const description = document.createElement("p");
+					const dueDate = document.createElement("p");
+					const priority = document.createElement("p");
+	
+					//Adding todo details to elements
+					
+					// console.log(listArray[j].todos[listTodoLen].title);
+					console.log("this is the length");
+					console.log(currentList.todos.length);
+					//displays the last todo that was given.
+					console.log(currentList.todos[j]);
+	
+					title.textContent = currentList.todos[j].title;
+					description.textContent = currentList.todos[j].description;
+					dueDate.textContent = currentList.todos[j].dueDate;
+					priority.textContent = currentList.todos[j].priority;
+	
+					//Settings Attributes
+					todoContainer.setAttribute("class", "todo-obj");
+					title.setAttribute("class", "todo-title");
+					description.setAttribute("class", "todo-desc");
+					dueDate.setAttribute("class", "todo-duedate");
+					priority.setAttribute("class", "todo-priority");
+	
+					title.setAttribute("class", "todo-items");
+					description.setAttribute("class", "todo-items");
+					dueDate.setAttribute("class", "todo-items");
+					priority.setAttribute("class", "todo-items");
+	
+					// let displayedTodos = document.querySelectorAll('.todo-obj');
+	
+					// //if grabbed title is the same as todo title do not display this todo. else display
+					// if (displayedTodos.length > 0) {
+					// 	if (d) {
+	
+					// 	}
+					// 4}
+	
+					todoContainer.append(title);
+					todoContainer.append(description);
+					todoContainer.append(dueDate);
+					todoContainer.append(priority);
+	
+					todoView.append(todoContainer);
+				}
 			} else {
 				console.log("there are no todos to display");
 			}
@@ -297,6 +314,10 @@ class Display {
 				counter.textContent = listTodoLen;
 			}
 		}
+	}
+	clearTodoView() {
+		const todoView = document.querySelector('.todo-view');
+		todoView.innerHTML = "";
 	}
 }
 export { Display };
