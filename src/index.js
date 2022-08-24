@@ -32,6 +32,6 @@ display.listForm();
 dataCond.createNewList();
 display.formReset();
 
-display.displayLists();
+display.displayListButtons();
 display.displaySelectedList();
 

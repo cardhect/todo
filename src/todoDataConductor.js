@@ -60,7 +60,7 @@ class Conductor {
 			let collection = lists.selectedOptions;
 
 			let selectedList = collection[0].label;
-			console.log(selectedList);
+			console.log('todo was inserted in: ' + selectedList);
 
 			//Inserts data to selected list when submitted.
 			for (let index = 0; index < listArray.length; index++) {
@@ -73,7 +73,7 @@ class Conductor {
 				}
 			}
 
-			display.formReset();
+		
 			console.log(listArray);
 		// });
 	}

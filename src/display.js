@@ -113,6 +113,20 @@ class Display {
 		submitBtn.addEventListener("click", () => {
 			dataCond.insertTodoIntoList();
 			self.displayTodoAmount();
+			// grabs the selected list in the options in the form
+			let lists = document.getElementById("list");
+			let collection = lists.selectedOptions;
+			let selectedList = collection[0].label;
+
+			const currentList = document.querySelector(".header__list-title").textContent;
+			if (selectedList == currentList) {
+				self.displayTodo();
+				self.formReset();
+			}else{
+				console.log('not currently in correct list view');
+				self.formReset();
+			}
+			
 			console.log("Hi:)");
 		});
 	}
@@ -146,7 +160,7 @@ class Display {
 		document.getElementById("todo-form").reset();
 	}
 
-	displayLists() {
+	displayListButtons() {
 		//Displays default Capture list in list view.
 		const listView = document.querySelector(".list-view");
 		const captureList = listArray[0].title;
@@ -183,17 +197,28 @@ class Display {
 		});
 	}
 
-	displayTodo() {
+	displayTodo(listView) {
 		//curently will display todo title. figure out a way to only display todo once to avoid duplicates.
-		const currentList = document.querySelector(
-			".header__list-title"
-		).textContent;
+		const currentList = document.querySelector(".header__list-title").textContent;
 		const todoView = document.querySelector(".todo-view");
 		//!BUG var (i) resets to 0 each time function is called thus causing it to display the same array element when you insert another one
+		// if list is displayed in todoView
+		// check if selected list has todos
+		// if true display todos
+		console.log(listArray[0].todos.length);
+
+		// when capture is clicked
+		// check if it has todos
+		// if true
+		// display
 		for (let i = 0; i < listArray.length; i++) {
-			// const element = listArray[i];
+			console.log('list array len: ' + listArray.length);
+			//listTitle is being used to hold value of the list title to check if it matches the selected list.
+			//! when new list is created and selected and new todo is inputed the todo is not being displayed because listTitle is refrencing 'capture' list due to i being 0. Find a way to grab what list was selected.
 			let listTitle = listArray[i].title;
+//! NOTE maybe create another for loop that cycles through the todos
 			if (currentList == listTitle && listArray[i].todos.length > 0) {
+				
 				const todoContainer = document.createElement("div");
 
 				const title = document.createElement("h1");
@@ -202,11 +227,17 @@ class Display {
 				const priority = document.createElement("p");
 
 				//Adding todo details to elements
-				console.log(listArray[i].todos[i].title);
-				title.textContent = listArray[i].todos[i].title;
-				description.textContent = listArray[i].todos[i].description;
-				dueDate.textContent = listArray[i].todos[i].dueDate;
-				priority.textContent = listArray[i].todos[i].priority;
+				const todosLen = listArray[i].todos.length-1;
+				console.log(listArray[i].todos[todosLen].title);
+				console.log('this is the length');
+				console.log(listArray[i].todos.length);
+				//displays the last todo that was given.
+				console.log(listArray[i].todos[todosLen]);
+				
+				title.textContent = listArray[i].todos[todosLen].title;
+				description.textContent = listArray[i].todos[todosLen].description;
+				dueDate.textContent = listArray[i].todos[todosLen].dueDate;
+				priority.textContent = listArray[i].todos[todosLen].priority;
 
 				//Settings Attributes
 				todoContainer.setAttribute('class','todo-obj');
