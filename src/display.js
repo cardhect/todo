@@ -14,8 +14,9 @@ class Display {
 		const form = document.createElement("form");
 		form.setAttribute("onsubmit", "return false");
 		form.setAttribute("id", "todo-form");
-		const todoView = document.querySelector(".box__container");
-		todoView.appendChild(form);
+		const todoContainer = document.querySelector(".modal-content");
+		const closeButton = document.querySelector('.close');
+		todoContainer.insertBefore(form,closeButton);
 		//each element displays different inputs based on their needed data.
 		for (let i = 0; i < inputArray.length; i++) {
 			const element = inputArray[i];
@@ -51,15 +52,13 @@ class Display {
 				input.setAttribute("name", "due-date");
 				form.appendChild(label);
 				form.appendChild(input);
-				
-
-
 			}
 			//change this to radio with 3 priority options low med high
 			if (element == "priority") {
 				let array = ["low", "med", "high"];
-
+				let fieldSet = document.createElement('fieldset');
 				let label = document.createElement("label");
+				
 				label.setAttribute("for", "priority");
 				label.textContent = "Priority: ";
 				form.appendChild(label);
@@ -75,9 +74,9 @@ class Display {
 					input.setAttribute("id", element);
 					input.setAttribute("name", "priority");
 					input.setAttribute("value", element);
-
-					form.appendChild(input);
-					form.appendChild(label);
+					form.appendChild(fieldSet);
+					fieldSet.appendChild(input);
+					fieldSet.appendChild(label);
 				}
 			}
 			if (element == "list") {
@@ -115,6 +114,7 @@ class Display {
 		submitBtn.addEventListener("click", () => {
 			dataCond.insertTodoIntoList();
 			self.displayTodoAmount();
+			dataCond.editTodoData();
 			// grabs the selected list in the options in the form
 			let lists = document.getElementById("list");
 			// let collection = lists.selectedOptions;
@@ -126,6 +126,8 @@ class Display {
 			if (self.selectedList == currentList) {
 				self.clearTodoView();
 				self.displayTodo();
+				self.editFormModal();
+				dataCond.editTodoData();
 				dataCond.removeTodo();
 				self.formReset();
 			} else {
@@ -133,6 +135,124 @@ class Display {
 				self.formReset();
 			}
 		});
+	}
+	editForm(){
+		let dataCond = new Conductor();
+		let inputArray = ["title", "description", "dueDate", "priority", "list"];
+
+		const form = document.createElement("form");
+		form.setAttribute("onsubmit", "return false");
+		form.setAttribute("id", "edit-form");
+		const todoContainer = document.querySelector(".edit-modal-content");
+		const closeButton = document.querySelector('.edit-close');
+		todoContainer.insertBefore(form,closeButton);
+		//each element displays different inputs based on their needed data.
+		for (let i = 0; i < inputArray.length; i++) {
+			const element = inputArray[i];
+			if (element == "title") {
+				let label = document.createElement("label");
+				label.setAttribute("for", "edit-title");
+				label.textContent = "Title:";
+				let input = document.createElement("input");
+				input.setAttribute("type", "text");
+				input.setAttribute("id", "edit-title");
+				input.setAttribute("name", "edit-title");
+
+				
+
+				form.appendChild(label);
+				form.appendChild(input);
+			}
+			if (element == "description") {
+				let label = document.createElement("label");
+				label.setAttribute("for", "edit-description");
+				label.textContent = "Description:";
+				let input = document.createElement("input");
+				input.setAttribute("type", "text");
+				input.setAttribute("id", "edit-description");
+				input.setAttribute("name", "edit-description");
+				form.appendChild(label);
+				form.appendChild(input);
+			}
+			if (element == "dueDate") {
+				let label = document.createElement("label");
+				label.setAttribute("for", "edit-due-date");
+				label.textContent = "Due Date:";
+				let input = document.createElement("input");
+				input.setAttribute("type", "date");
+				input.setAttribute("id", "edit-due-date");
+				input.setAttribute("name", "edit-due-date");
+				form.appendChild(label);
+				form.appendChild(input);
+			}
+			//change this to radio with 3 priority options low med high
+			if (element == "priority") {
+				let array = ["low", "med", "high"];
+				let fieldSet = document.createElement('fieldset');
+				let label = document.createElement("label");
+				
+				label.setAttribute("for", "edit-priority");
+				label.textContent = "Priority: ";
+				form.appendChild(label);
+				for (let index = 0; index < array.length; index++) {
+					const element = array[index];
+
+					let label = document.createElement("label");
+					label.setAttribute("for", element);
+					label.textContent = element;
+
+					let input = document.createElement("input");
+					input.setAttribute("type", "radio");
+					input.setAttribute("id", element);
+					input.setAttribute("name", "edit-priority");
+					form.appendChild(fieldSet);
+					fieldSet.appendChild(input);
+					fieldSet.appendChild(label);
+				}
+			}
+			if (element == "list") {
+				let label = document.createElement("label");
+				label.setAttribute("for", "List");
+				label.textContent = "List:";
+				let select = document.createElement("select");
+				select.setAttribute("id", "list");
+				select.setAttribute("name", "list");
+				form.appendChild(label);
+				form.appendChild(select);
+
+				//Updates options on form when new list is created.
+				for (let i = 0; i < listArray.length; i++) {
+					// const element = listArray[i].title;
+					const option = document.createElement("option");
+					option.setAttribute("value", listArray[i].title);
+					option.setAttribute("class", "list-value");
+					const capitalizedList =
+						listArray[i].title.charAt(0).toUpperCase() +
+						listArray[i].title.slice(1);
+					option.textContent = capitalizedList;
+					select.append(option);
+				}
+			}
+		}
+		//ON SUBMIT EVENT FUNC
+		const edit = document.createElement("input");
+		edit.setAttribute("type", "submit");
+		edit.setAttribute("value", "Edit");
+		edit.setAttribute("id", "edit-form-btn");
+		form.appendChild(edit);
+	}
+
+	selectedTodoEdit(){
+		
+		let title;
+		let dueDate;
+		let desc;
+		let prio;
+
+		const titleInput = document.querySelector('#edit-title')
+		
+		
+		
 	}
 
 	listForm() {
@@ -145,7 +265,7 @@ class Display {
 		let label = document.createElement("label");
 		label.setAttribute("for", "new-list");
 		label.setAttribute("name", "new-list");
-		label.textContent = "List:";
+		label.textContent = "Add List:";
 		let input = document.createElement("input");
 		input.setAttribute("type", "text");
 		input.setAttribute("id", "new-list");
@@ -211,7 +331,7 @@ class Display {
 		dataCond.removeTodo();
 	}
 
-	displayTodo(listView) {
+	displayTodo() {
 		const currentList = document.querySelector(
 			".header__list-title"
 		).textContent;
@@ -230,39 +350,44 @@ class Display {
 					// const element = listArray.todos[index];
 
 					const todoContainer = document.createElement("div");
+					const todoTopDiv = document.createElement("div");
+					const todoBotDiv = document.createElement("div");
 
 					const title = document.createElement("h1");
 					const description = document.createElement("p");
 					const dueDate = document.createElement("p");
 					const priority = document.createElement("p");
+					const edit = document.createElement("button");
 					const deleteTodo = document.createElement("button");
-					// const changeList = document.createElement('button');
 
 					title.textContent = currentList.todos[j].title;
 					description.textContent = currentList.todos[j].description;
 					dueDate.textContent = currentList.todos[j].dueDate;
 					priority.textContent = currentList.todos[j].priority;
+					edit.textContent = "Edit";
 					deleteTodo.textContent = "Delete";
-					// Settings Attributes
+					// Container Attributes
 					todoContainer.setAttribute("class", "todo-obj");
-					title.setAttribute("class", "todo-title");
-					description.setAttribute("class", "todo-desc");
-					dueDate.setAttribute("class", "todo-duedate");
-					priority.setAttribute("class", "todo-priority");
-					deleteTodo.setAttribute("class", "todo-delete");
-
-					title.setAttribute("class", "todo-items");
-					description.setAttribute("class", "todo-items");
-					dueDate.setAttribute("class", "todo-items");
-					priority.setAttribute("class", "todo-items");
+					todoTopDiv.setAttribute("class", "todo-top-div");
+					todoBotDiv.setAttribute("class", "todo-bot-div");
+					//Element Attributes
+					title.setAttribute("class", "todo-items todo-title");
+					description.setAttribute("class", "todo-items todo-desc");
+					dueDate.setAttribute("class", "todo-items todo-duedate");
+					priority.setAttribute("class", "todo-items todo-priority");
+					edit.setAttribute("class", "todo-items todo-edit");
 					deleteTodo.setAttribute("class", "todo-items todo-delete");
 
-					todoContainer.append(title);
-					todoContainer.append(description);
-					todoContainer.append(dueDate);
-					todoContainer.append(priority);
-					todoContainer.append(deleteTodo);
-					//GEO EATS ASS
+					todoTopDiv.append(title);
+					todoTopDiv.append(priority);
+					todoBotDiv.append(dueDate);
+					todoBotDiv.append(description);
+					todoBotDiv.append(edit);
+					todoBotDiv.append(deleteTodo);
+
+					todoContainer.append(todoTopDiv);
+					todoContainer.append(todoBotDiv);
+
 					todoView.append(todoContainer);
 				}
 			} else {
@@ -296,6 +421,59 @@ class Display {
 	clearTodoView() {
 		const todoView = document.querySelector(".todo-view");
 		todoView.innerHTML = "";
+	}
+
+	todoFormModal() {
+		var modal = document.getElementById("myModal");
+
+		// Get the button that opens the modal
+		var btn = document.querySelector(".todo-form-modal");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks the button, open the modal
+		btn.onclick = function () {
+			modal.style.display = "block";
+		};
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function () {
+			modal.style.display = "none";
+		};
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		};
+	}
+	editFormModal(){
+		var modal = document.getElementById("edit-modal");
+
+		// Get the button that opens the modal
+		var btn = document.querySelector(".todo-edit");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("edit-close")[0];
+
+		// When the user clicks the button, open the modal
+		btn.onclick = function () {
+			modal.style.display = "block";
+		};
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function () {
+			modal.style.display = "none";
+		};
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		};
 	}
 }
 export { Display };

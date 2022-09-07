@@ -20,8 +20,13 @@ class Conductor {
 		
 		//Grabs duedate and formats it.
 		const dueDate = document.getElementById("due-date").value;
-	
-		let formatedDate = format(new Date(dueDate), 'MMM d, Y');
+		let formatedDate = '';
+		if (dueDate.length > 0) {
+			formatedDate = format(new Date(dueDate), 'M/d/yy');
+		} else {
+			formatedDate = '';
+			console.log('no date given');
+		}
 		// console.log(dates);
 
 
@@ -103,16 +108,20 @@ class Conductor {
 	}
 
 	removeTodo(list) {
+		const display = new Display();
 		let deleteButtons = document.querySelectorAll(".todo-delete");
 		let self = this;
+
 		const todoView = document.querySelector(".todo-view");
 		for (let index = 0; index < deleteButtons.length; index++) {
 			deleteButtons[index].addEventListener("click", (event) => {
-				const todoElement = event.path[1];
+				const todoElement = event.path[2];
+				console.log(event);
+				
 				todoView.removeChild(todoElement);
 
 				//removes the todo from its list.
-				const deletedTodo = event.path[1].children[0].innerText;
+				const deletedTodo =event.path[2].firstChild.childNodes[0].innerText;
 				const listTitle = document.querySelector(
 					".header__list-title"
 				).textContent;
@@ -120,12 +129,35 @@ class Conductor {
 					const listToRemoveFrom = listArray[i];
 					if (listTitle == listArray[i].title) {
 						listToRemoveFrom.remove(deletedTodo);
+						display.displayTodoAmount();
 						console.log(listToRemoveFrom);
+						console.log(listArray);
 					} else {
 						console.log("Title didnt match");
 					}
 				}
 			});
+		}
+	}
+	editTodoData(){
+		const display = new Display();
+		const todoEditBtns = document.querySelectorAll('.todo-edit');
+
+		for (let i = 0; i < todoEditBtns.length; i++) {
+			const element = todoEditBtns[i];
+
+			element.addEventListener('click',(e)=>{
+				console.log('you clicked a edit button bby');
+				const formEle = document.getElementById('edit-modal');
+				console.log(formEle);
+				formEle.style.display = 'block';
+					const title = e.target.parentElement.parentElement.childNodes[0].childNodes[0].innerText;
+					const desc = e.target.parentNode.parentNode.childNodes[1].childNodes[1].innerText;
+					const dueDate = e.target.parentNode.parentNode.childNodes[1].childNodes[0].innerText;
+					const prio = e.target.parentNode.parentNode.childNodes[0].childNodes[1].innerText;
+					console.log(title + ' ' + desc + ' ' + dueDate + ' ' + prio);
+			})
+			
 		}
 	}
 }

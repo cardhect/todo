@@ -5,11 +5,34 @@ body {
     flex-wrap: wrap;
     margin: 0%;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-form {
-    color: white;
+#todo-form {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: flex-start;
 }
+#todo-form>input{
+    margin-bottom: 10px;
+}
+
+#todo-form>fieldset{
+    margin-bottom: 10px;
+    
+}
+
+#todo-form>select{
+    margin-bottom: 20px;
+
+}
+/* LIST FORM */
+#list-form {
+    margin-left: 2%;
+}
+
 /* Left Side CSS */
 .left-box {
     width: 30%;
@@ -25,6 +48,7 @@ form {
     align-content: center;
     justify-content: center;
     padding: 10px;
+    flex-direction: column;
 
 }
 
@@ -59,25 +83,145 @@ form {
     margin-right: 20px;
 }
 
+
 .todo-view {
-    height: 85%;
+    height: 86%;
     width: auto;
     border: 1px solid red;
+    overflow-y:auto
+
+}
+
+.todo-obj {
+    padding: 20px;
 }
 
 .todo-obj {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: baseline;
+    flex-direction: column;
+    align-items: stretch;
 }
 .todo-title {
-
+    margin-bottom: 0;
 }
-.todo-desc {
-
+.todo-priority {
+    margin-bottom: 0;
 }
-/* .todo-duedate
-.todo-priority */
+.todo-delete {
+    margin-left: 0;
+}
+.todo-edit{
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.todo-top-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.todo-bot-div{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 15px;
+}
+
+/* MODAL */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: rgb(169, 206, 255) ;
+    margin: auto;
+    padding: 20px;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    border: rgb(79, 155, 255) 10px solid;
+  }
+  .edit-modal-content {
+    background-color: rgb(169, 206, 255) ;
+    margin: auto;
+    padding: 20px;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+    border: rgb(79, 155, 255) 10px solid;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: auto;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+  .edit-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-left: auto;
+  }
+  
+  .edit-close:hover,
+  .edit-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 
+
+  /* Add todo container */
+  .add-todo-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.add-todo-container>p{
+    margin: 0;
+    margin-left: 1%;
+    
+}
+
+/* View Buttons  */
+.view-button {
+    width: 100px;
+    height: 100px;
+}
+
+.top-btn-container{
+    display: flex;
+}
+.bot-btn-container{
+    display: flex;
+}

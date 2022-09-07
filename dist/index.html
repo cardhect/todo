@@ -1,35 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="../src/style.css" />
-		<title>Document</title>
-	</head>
-	<body>
-		<div class="left-box">
-			<div class="box__container">
-				
-			</div>
-			<div class="list-view">
-				<h3>Lists</h3>
-				<div class="list__container">
 
-				</div>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../src/style.css" />
+	<title>Document</title>
+</head>
+
+<body>
+	<div class="left-box">
+		<div class="box__container">
+			<div class="top-btn-container">
+				<button class="view-button">All Tasks</button>
+				<button class="view-button">Today</button>
 			</div>
-			<div class="add-list"></div>
-		</div>
-		<div class="right-box">
-			<div class="header">
-				<h1 class="header__list-title">Todo</h1>
-				<h2 id="header__todo-amount">0</h2>
+			<div class="bot-btn-container">
+		 <button class="view-button">Upcoming Tasks</button>
+				<button class="view-button">Important</button>
 			</div>
-			<div class="todo-view">
-         
-				</div> 
-            </div>
 		</div>
-	</body>
-	<script src="main.js"></script>
+		<div class="list-view">
+			<h3>Lists</h3>
+			<div class="list__container">
+
+			</div>
+		</div>
+		<div class="add-list"></div>
+	</div>
+	<div class="right-box">
+		<div class="header">
+			<h1 class="header__list-title">Todo</h1>
+			<h2 id="header__todo-amount">0</h2>
+		</div>
+		<div class="todo-view">
+		</div>
+		<div class="add-todo-container">
+			<p>Add todo</p>
+			<button class="todo-form-modal">+</button>
+		</div>
+	</div>
+</div>
+	<!-- Create todo Form Modal -->
+<div id="myModal" class="modal">
+
+	<!-- Modal content -->
+	<div class="modal-content">
+	  <span class="close">&times;</span>
+	</div>
+  
+  </div>
+
+  	<!-- Edit Form Modal -->
+<div id="edit-modal" class="modal">
+
+	<!-- Modal content -->
+	<div class="edit-modal-content">
+	  <span class="edit-close">&times;</span>
+	</div>
+  
+  </div>
+</body>
+<script src="main.js"></script>
+
 </html>

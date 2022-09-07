@@ -22,6 +22,9 @@ display.listForm();
 dataCond.createNewList();
 display.formReset();
 display.displayListButtons();
+display.todoFormModal();
+display.editForm();
+
 
 
 //TODO Create modal to grab user information. Instead of taking up space in view. Use same type of modal to edit todo details. 
@@ -32,11 +35,4 @@ display.displayListButtons();
 
 //TODO View All button
 
-//TODO Expand todo button
 //TODO Edit details button w/ modal
-//TODO use date-fns to format the dates
-//TODO
-
-
-let dates = format(new Date('1998-4-9'), 'MMM d, Y');
-console.log(dates);
