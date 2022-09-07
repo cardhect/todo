@@ -26,12 +26,7 @@ display.todoFormModal();
 display.editForm();
 
 
-
-//TODO Create modal to grab user information. Instead of taking up space in view. Use same type of modal to edit todo details. 
-
 //TODO Set todo Complete button.
-
-//TODO Change todo Priority buttons
 
 //TODO View All button
 

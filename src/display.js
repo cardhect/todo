@@ -114,7 +114,7 @@ class Display {
 		submitBtn.addEventListener("click", () => {
 			dataCond.insertTodoIntoList();
 			self.displayTodoAmount();
-			dataCond.editTodoData();
+			dataCond.editTodoDataBtn();
 			// grabs the selected list in the options in the form
 			let lists = document.getElementById("list");
 			// let collection = lists.selectedOptions;
@@ -127,7 +127,7 @@ class Display {
 				self.clearTodoView();
 				self.displayTodo();
 				self.editFormModal();
-				dataCond.editTodoData();
+				dataCond.editTodoDataBtn();
 				dataCond.removeTodo();
 				self.formReset();
 			} else {
@@ -203,7 +203,8 @@ class Display {
 
 					let input = document.createElement("input");
 					input.setAttribute("type", "radio");
-					input.setAttribute("id", element);
+					input.setAttribute("id", `edit-${element}`);
+					input.setAttribute('value', element);
 					input.setAttribute("name", "edit-priority");
 					form.appendChild(fieldSet);
 					fieldSet.appendChild(input);
@@ -234,22 +235,47 @@ class Display {
 				}
 			}
 		}
-		//ON SUBMIT EVENT FUNC
 		const edit = document.createElement("input");
 		edit.setAttribute("type", "submit");
-		edit.setAttribute("value", "Edit");
+		edit.setAttribute("value", "Make Changes");
 		edit.setAttribute("id", "edit-form-btn");
 		form.appendChild(edit);
+		//Make Changes EVENT FUNC
+		const makeChangesBtn = document.getElementById('edit-form-btn');
+		makeChangesBtn.addEventListener('click',()=>{
+			console.log('changes were made...')
+			// const currentTodo = dataCond.todoObj.title;
+			//update changes to todo obj
+		    // dataCond.updateTodo();
+			//display changes on todo view
+		})
 	}
-
-	selectedTodoEdit(){
+	//Shows todo data on edit form
+	selectedTodoEdit(title,desc,dueDate,prio){
 		
-		let title;
-		let dueDate;
-		let desc;
-		let prio;
 
-		const titleInput = document.querySelector('#edit-title')
+		const titleInput = document.querySelector('#edit-title');
+		const descInput = document.querySelector('#edit-description');
+		const dueDateInput = document.querySelector('#edit-due-date');
+		const prioLow = document.querySelector('#edit-low');
+		const prioMed = document.querySelector('#edit-med');
+		const prioHigh = document.querySelector('#edit-high');
+		
+		titleInput.value = title;
+		descInput.value = desc;
+		dueDateInput.value = dueDate;
+		
+		if (prio == 'low'){
+			prioLow.checked = true;
+			
+		} else if (prio == 'med') {
+			prioMed.checked = true;
+			
+		} else if (prio == 'high') {
+			prioHigh.checked = true;
+			
+		}
+		// dueDateInput
 		
 		
 		

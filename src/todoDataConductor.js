@@ -7,6 +7,13 @@ class Conductor {
 	constructor() {
 		this.todoData = []; //I want to access this array in method.
 		this.list;
+		this.todoObj = {
+			title: '',
+			desc: '',
+			dueDate: '',
+			prio: '',
+		}
+		
 	}
 
 	grabFormData() {
@@ -49,6 +56,93 @@ class Conductor {
 		//Pushes todo to array
 		self.todoData.push(todoObj);
 		self.list = list;
+	}
+
+	grabEditFromData(){
+		const editFormBtn = document.querySelector("#edit-form-btn");
+
+		let self = this;
+
+		//Grabs data from form to create todoObj.
+		const title = document.getElementById("edit-title").value;
+		const description = document.getElementById("edit-description").value;
+		
+		//Grabs duedate and formats it.
+		const dueDate = document.getElementById("edit-due-date").value;
+		let formatedDate = '';
+		if (dueDate.length > 0) {
+			formatedDate = format(new Date(dueDate), 'M/d/yy');
+		} else {
+			formatedDate = '';
+			console.log('no date given');
+		}
+		// console.log(dates);
+
+
+
+		let priority;
+		var ele = document.getElementsByName("edit-priority");
+
+		for (let i = 0; i < ele.length; i++) {
+			if (ele[i].checked) {
+				priority = ele[i].value;
+			}
+		}
+
+		return {title,description,dueDate,priority};
+		
+		
+	}
+
+		
+		
+	updateTodo(todoTitle){
+			
+			console.log(listArray);
+			//Edited data from edit form.
+			let newTitle = this.grabEditFromData().title;
+			let newDesc = this.grabEditFromData().description;
+			let newDueDate = this.grabEditFromData().dueDate;
+			let newPrio = this.grabEditFromData().priority;
+			
+			//atodoObj Node list
+			const todoObjs = document.querySelectorAll('.todo-obj');
+			
+			const currentList = document.querySelector('.header__list-title').textContent;
+
+			for (let i = 0; i < listArray.length; i++) {
+				const list = listArray[i].title;
+
+				if (currentList == list) {
+					
+					for (let j = 0; j < todoObjs.length; j++) {
+						const todoObjTitle = todoObjs[j].children[0].children[0].innerText;
+						
+						if (todoTitle == todoObjTitle) {
+							const selectedTodo = listArray[i].todos[j];
+							//Update todo obj.
+							selectedTodo.title = newTitle;
+							selectedTodo.description = newDesc;
+							selectedTodo.dueDate = newDueDate;
+							selectedTodo.priority = newPrio;
+							
+							//Update todo in todo view.
+								todoObjs[j].children[0].firstChild.innerText = newTitle;
+								
+								todoObjs[j].children[1].children[1].innerText = newDesc;
+								
+								todoObjs[j].children[1].children[0].innerText = newDueDate;
+								
+								todoObjs[j].children[0].lastChild.innerText = newPrio;
+
+						}
+						
+						
+					}
+				}
+				
+			}
+			
 	}
 
 	pushToList(list) {
@@ -139,7 +233,8 @@ class Conductor {
 			});
 		}
 	}
-	editTodoData(){
+	editTodoDataBtn(){
+		const self = this;
 		const display = new Display();
 		const todoEditBtns = document.querySelectorAll('.todo-edit');
 
@@ -151,11 +246,28 @@ class Conductor {
 				const formEle = document.getElementById('edit-modal');
 				console.log(formEle);
 				formEle.style.display = 'block';
+				//Title works
 					const title = e.target.parentElement.parentElement.childNodes[0].childNodes[0].innerText;
+					//Desc Works
 					const desc = e.target.parentNode.parentNode.childNodes[1].childNodes[1].innerText;
+					//due date works
 					const dueDate = e.target.parentNode.parentNode.childNodes[1].childNodes[0].innerText;
+					let formatedDate = format(new Date(dueDate), 'yyyy-MM-dd');
+
+				
 					const prio = e.target.parentNode.parentNode.childNodes[0].childNodes[1].innerText;
-					console.log(title + ' ' + desc + ' ' + dueDate + ' ' + prio);
+
+					//Shows todo data on edit form
+					display.selectedTodoEdit(title,desc,formatedDate, prio);
+
+					const makeChangesBtn = document.getElementById('edit-form-btn');
+
+					makeChangesBtn.addEventListener('click',()=>{
+						 self.updateTodo(title);
+						//display.displayTodo();
+					})
+
+					
 			})
 			
 		}
