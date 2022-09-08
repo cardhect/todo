@@ -3,7 +3,7 @@ import { listArray } from "./listArrayTracker";
 
 class Display {
 	constructor() {
-		this.selectedList = "Todo";
+
 	}
 
 	//creates a the form needed from todo
@@ -114,7 +114,7 @@ class Display {
 		submitBtn.addEventListener("click", () => {
 			dataCond.insertTodoIntoList();
 			self.displayTodoAmount();
-			dataCond.editTodoDataBtn();
+			dataCond.todoEditButtonListener();
 			// grabs the selected list in the options in the form
 			let lists = document.getElementById("list");
 			// let collection = lists.selectedOptions;
@@ -122,12 +122,14 @@ class Display {
 			const currentList = document.querySelector(
 				".header__list-title"
 			).textContent;
+			
+			const selectedList = document.getElementById("list").value;
 
-			if (self.selectedList == currentList) {
+			if (selectedList == currentList) {
 				self.clearTodoView();
 				self.displayTodo();
 				self.editFormModal();
-				dataCond.editTodoDataBtn();
+				dataCond.todoEditButtonListener();
 				dataCond.removeTodo();
 				self.formReset();
 			} else {
@@ -216,7 +218,7 @@ class Display {
 				label.setAttribute("for", "List");
 				label.textContent = "List:";
 				let select = document.createElement("select");
-				select.setAttribute("id", "list");
+				select.setAttribute("id", "edit-list");
 				select.setAttribute("name", "list");
 				form.appendChild(label);
 				form.appendChild(select);
@@ -242,12 +244,10 @@ class Display {
 		form.appendChild(edit);
 		//Make Changes EVENT FUNC
 		const makeChangesBtn = document.getElementById('edit-form-btn');
+		let self = this;
 		makeChangesBtn.addEventListener('click',()=>{
 			console.log('changes were made...')
-			// const currentTodo = dataCond.todoObj.title;
-			//update changes to todo obj
-		    // dataCond.updateTodo();
-			//display changes on todo view
+			self.editFormModal();
 		})
 	}
 	//Shows todo data on edit form
@@ -309,6 +309,10 @@ class Display {
 	formReset() {
 		document.getElementById("todo-form").reset();
 	}
+	editFormReset() {
+		
+		document.getElementById("edit-form").reset();
+	}
 
 	displayListButtons() {
 		//Displays default Capture list in list view.
@@ -354,6 +358,7 @@ class Display {
 
 		this.displayTodoAmount();
 		this.displayTodo();
+		dataCond.todoEditButtonListener();
 		dataCond.removeTodo();
 	}
 
@@ -365,13 +370,14 @@ class Display {
 
 		for (let i = 0; i < listArray.length; i++) {
 			console.log("list array len: " + listArray.length);
+			console.log(listArray);
 			//listTitle is being used to hold value of the list title to check if it matches the selected list.
 			let listTitle = listArray[i].title;
-
+			let thisList = listArray[i];
 			let listTodoLen = listArray[i].todos.length;
-			const currentList = listArray[i];
-
-			if (this.selectedList == listTitle && listTodoLen > 0) {
+			
+			// const selectedList = document.getElementById("list").value;
+			if (currentList == listTitle && listTodoLen > 0) {
 				for (let j = 0; j < listTodoLen; j++) {
 					// const element = listArray.todos[index];
 
@@ -386,10 +392,10 @@ class Display {
 					const edit = document.createElement("button");
 					const deleteTodo = document.createElement("button");
 
-					title.textContent = currentList.todos[j].title;
-					description.textContent = currentList.todos[j].description;
-					dueDate.textContent = currentList.todos[j].dueDate;
-					priority.textContent = currentList.todos[j].priority;
+					title.textContent = thisList.todos[j].title;
+					description.textContent = thisList.todos[j].description;
+					dueDate.textContent = thisList.todos[j].dueDate;
+					priority.textContent = thisList.todos[j].priority;
 					edit.textContent = "Edit";
 					deleteTodo.textContent = "Delete";
 					// Container Attributes
@@ -485,17 +491,17 @@ class Display {
 		var span = document.getElementsByClassName("edit-close")[0];
 
 		// When the user clicks the button, open the modal
-		//! Error occurs when submiting todo into a list that is not visible.
 		btn.onclick = function () {
 			modal.style.display = "block";
 		};
-
+		
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function () {
 			modal.style.display = "none";
 		};
-
+		
 		// When the user clicks anywhere outside of the modal, close it
+		//!todo Bug unable to exit edit since this func is not listening when in another list
 		window.onclick = function (event) {
 			if (event.target == modal) {
 				modal.style.display = "none";

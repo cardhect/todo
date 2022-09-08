@@ -26,8 +26,5 @@ display.todoFormModal();
 display.editForm();
 
 
-//TODO Set todo Complete button.
-
-//TODO View All button
-
-//TODO Edit details button w/ modal
+//TODO add ability to change lists in edit form
+//TODO fix edit form css

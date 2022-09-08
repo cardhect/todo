@@ -233,10 +233,10 @@ class Conductor {
 			});
 		}
 	}
-	editTodoDataBtn(){
+	todoEditButtonListener(){
 		const self = this;
 		const display = new Display();
-		const todoEditBtns = document.querySelectorAll('.todo-edit');
+ 		const todoEditBtns = document.querySelectorAll('.todo-edit');
 
 		for (let i = 0; i < todoEditBtns.length; i++) {
 			const element = todoEditBtns[i];
@@ -264,7 +264,7 @@ class Conductor {
 
 					makeChangesBtn.addEventListener('click',()=>{
 						 self.updateTodo(title);
-						//display.displayTodo();
+							
 					})
 
 					
