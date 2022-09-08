@@ -485,6 +485,7 @@ class Display {
 		var span = document.getElementsByClassName("edit-close")[0];
 
 		// When the user clicks the button, open the modal
+		//! Error occurs when submiting todo into a list that is not visible.
 		btn.onclick = function () {
 			modal.style.display = "block";
 		};
