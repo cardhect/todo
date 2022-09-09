@@ -248,6 +248,8 @@ class Display {
 		makeChangesBtn.addEventListener('click',()=>{
 			console.log('changes were made...')
 			self.editFormModal();
+			//reset form
+			self.editFormReset();
 		})
 	}
 	//Shows todo data on edit form
@@ -309,8 +311,7 @@ class Display {
 	formReset() {
 		document.getElementById("todo-form").reset();
 	}
-	editFormReset() {
-		
+	editFormReset() {	
 		document.getElementById("edit-form").reset();
 	}
 

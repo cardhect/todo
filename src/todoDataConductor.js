@@ -254,17 +254,35 @@ class Conductor {
 					const dueDate = e.target.parentNode.parentNode.childNodes[1].childNodes[0].innerText;
 					let formatedDate = format(new Date(dueDate), 'yyyy-MM-dd');
 
-				
+					//Prio works
 					const prio = e.target.parentNode.parentNode.childNodes[0].childNodes[1].innerText;
 
 					//Shows todo data on edit form
 					display.selectedTodoEdit(title,desc,formatedDate, prio);
 
+					//updates list options in edit form 
+					for (let i = 0; i < listArray.length; i++) {
+						const element = listArray[i].title;
+						const option = document.createElement("option");
+						option.setAttribute("value", listArray[i].title);
+						option.setAttribute("class", "list-value");
+						const capitalizedList =
+							listArray[i].title.charAt(0).toUpperCase() +
+							listArray[i].title.slice(1);
+							option.textContent = capitalizedList;
+						
+						const select = document.querySelector('#edit-list');
+
+							select.append(option);
+					}
+
+
+
 					const makeChangesBtn = document.getElementById('edit-form-btn');
 
 					makeChangesBtn.addEventListener('click',()=>{
 						 self.updateTodo(title);
-							
+
 					})
 
 					

@@ -225,3 +225,25 @@ body {
 .bot-btn-container{
     display: flex;
 }
+
+/* Edit form modal */
+#edit-form {
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: flex-start;
+}
+#edit-form>input{
+    margin-bottom: 10px;
+}
+
+#edit-form>fieldset{
+    margin-bottom: 10px;
+    
+}
+
+#edit-form>select{
+    margin-bottom: 20px;
+
+}
