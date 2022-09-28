@@ -1,6 +1,7 @@
 import {parseISO, compareAsc} from "date-fns";
 export function bubbleSort(args) {
 
+
     for (let index = 0; index < args.length; index++) {
         let secondEleIndex = index + 1;
         const firstTodoElement = args[index];
@@ -16,23 +17,20 @@ export function bubbleSort(args) {
             
             
                     //if 1 returned first date is after the second, -1 first date is before, 0 dates are equal
-
-                    //I need to compare 2 at a time starting from 0,1 1,2, 2,3 3,4.
-                    //if first number is less swap them and continue onto next 2.
-
-                    //! This code is currently comparing0
-                                    
                     
-                                    
+                    //sets the return val to 1 -1 or 0               
                     const compareVal = compareAsc(firstElementDate,secElementDate);
             
                     console.log(compareVal);
-            
+                    //if first element date is after the second swap their places.
                     if (compareVal == 1) {
                         //swap elements
                         args[index] = secTodoElement;
                         args[secondEleIndex] = firstTodoElement;
                         console.log(args)
+                        //resets for loop.
+                        index = -1;
+                        continue;
                     } else if (compareVal == -1) {
                         //nothing changes
                     } else if (compareVal == 0) {
