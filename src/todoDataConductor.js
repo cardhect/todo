@@ -261,7 +261,7 @@ class Conductor {
 					display.selectedTodoEdit(title,desc,formatedDate, prio);
 
 					//updates list options in edit form 
-					for (let i = 0; i < listArray.length; i++) {
+					for (let i = 1; i < listArray.length; i++) {
 						const element = listArray[i].title;
 						const option = document.createElement("option");
 						option.setAttribute("value", listArray[i].title);
@@ -282,13 +282,53 @@ class Conductor {
 
 					makeChangesBtn.addEventListener('click',()=>{
 						 self.updateTodo(title);
-
+						 
+						})
+						
+						
 					})
-
 					
-			})
+				}
+			}
 			
-		}
-	}
+	// changeList() {
+
+	// 	//Currently does not work when todo title is changed since it does not match with one currently in the list.
+	// 	const display = new Display();
+	// 	const makeChangesBtn = document.querySelector('#edit-form-btn');
+		
+	// 	makeChangesBtn.addEventListener('click', ()=>{
+			
+	// 		const selectedList = document.getElementById('edit-list').selectedOptions[0].label;
+			
+	// 		//remove todo obj from its current list
+	// 		const currentList = document.querySelector('.header__list-title').innerText;
+	// 		const todoObjTitle =  document.querySelector('#edit-title').value;
+
+	// 		for (let i = 0; i < listArray.length; i++) {
+	// 			const thisListTitle = listArray[i].title;
+
+	// 			if (thisListTitle == currentList) {
+	// 				const listTodos = listArray[i].todos
+	// 				for (let j = 0; j < listTodos.length; j++) {
+	// 					const thisTodoTitle = listTodos[j].title;
+	// 					if (thisTodoTitle == todoObjTitle) {
+	// 						console.log('we are at the correct todo!');
+	// 					}
+	// 				}
+	// 			}
+				
+	// 		}
+
+	// 		//let todoObj = list[i].todos[i].remove();
+
+	// 		//move todoobj to its new list
+			
+
+
+			
+			
+	// 	})
+	// }
 }
 export { Conductor };

@@ -24,7 +24,10 @@ display.formReset();
 display.displayListButtons();
 display.todoFormModal();
 display.editForm();
+// dataCond.changeList();
 
-
+//Display different tasks
+display.displayAllTasks();
+display.displayUpcomingTasks();
 //TODO add ability to change lists in edit form
 //TODO fix edit form css
