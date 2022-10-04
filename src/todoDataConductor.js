@@ -29,7 +29,7 @@ class Conductor {
 		const dueDate = document.getElementById("due-date").value;
 		let formatedDate = '';
 		if (dueDate.length > 0) {
-			formatedDate = format(new Date(dueDate), 'M/d/yy');
+			formatedDate = format(new Date(dueDate.replace(/-/g, '/')), 'M/d/yy');
 		} else {
 			formatedDate = '';
 			console.log('no date given');

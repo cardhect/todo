@@ -29,5 +29,6 @@ display.editForm();
 //Display different tasks
 display.displayAllTasks();
 display.displayUpcomingTasks();
+display.displayTodayTasks();
 //TODO add ability to change lists in edit form
 //TODO fix edit form css

@@ -1,7 +1,7 @@
 import { Conductor } from "./todoDataConductor";
 import { listArray } from "./listArrayTracker";
 import { beTarask } from "date-fns/locale";
-import { compareAsc, format, formatISO, parse, parseISO } from "date-fns";
+import { compareAsc, format, formatISO, parse, parseISO, isToday } from "date-fns";
 import { bubbleSort } from "./bubbleSort";
 
 class Display {
@@ -429,6 +429,8 @@ class Display {
 			}
 		}
 	}
+
+	
 	//Changes number amount of todos.
 	displayTodoAmount() {
 		for (let i = 0; i < listArray.length; i++) {
@@ -597,13 +599,67 @@ class Display {
 			})
 		}
 
+	displayTodoTasks(todoArray) {
+		this.clearTodoView();
+	
+					const todoView = document.querySelector(".todo-view");
+			
+						console.log(todoArray);
+						
+							for (let j = 0; j < todoArray.length; j++) {
+			
+								const todoContainer = document.createElement("div");
+								const todoTopDiv = document.createElement("div");
+								const todoBotDiv = document.createElement("div");
+			
+								const title = document.createElement("h1");
+								const description = document.createElement("p");
+								const dueDate = document.createElement("p");
+								const priority = document.createElement("p");
+								const edit = document.createElement("button");
+								const deleteTodo = document.createElement("button");
+			
+								title.textContent = todoArray[j].title;
+								description.textContent = todoArray[j].description;
+								dueDate.textContent = todoArray[j].dueDate;
+								priority.textContent = todoArray[j].priority;
+								edit.textContent = "Edit";
+								deleteTodo.textContent = "Delete";
+								// Container Attributes
+								todoContainer.setAttribute("class", "todo-obj");
+								todoTopDiv.setAttribute("class", "todo-top-div");
+								todoBotDiv.setAttribute("class", "todo-bot-div");
+								//Element Attributes
+								title.setAttribute("class", "todo-items todo-title");
+								description.setAttribute("class", "todo-items todo-desc");
+								dueDate.setAttribute("class", "todo-items todo-duedate");
+								priority.setAttribute("class", "todo-items todo-priority");
+								edit.setAttribute("class", "todo-items todo-edit");
+								deleteTodo.setAttribute("class", "todo-items todo-delete");
+			
+								todoTopDiv.append(title);
+								todoTopDiv.append(priority);
+								todoBotDiv.append(dueDate);
+								todoBotDiv.append(description);
+								todoBotDiv.append(edit);
+								todoBotDiv.append(deleteTodo);
+			
+								todoContainer.append(todoTopDiv);
+								todoContainer.append(todoBotDiv);
+			
+								todoView.append(todoContainer);
+							}
+	}
+
 	displayUpcomingTasks(){
-		const todayTasksBtn = document.getElementById('today-tasks');
-		const todoArray= [];
 
-		todayTasksBtn.addEventListener('click',()=>{
+		//! note todos are being sorted correctly, i still need to write code that grabs the sorted todo array and displays them into the view
+		const upcomingTasksBtn = document.getElementById('upcoming-tasks');
+		
+		upcomingTasksBtn.addEventListener('click',()=>{
+			let newTodoArray = [];
 			//Put tasks into this array ordered by most recent date to furthest.
-
+			
 			//updates title to Upcoming
 			const viewTitle = document.querySelector('.header__list-title');
 			viewTitle.textContent = 'Upcoming';
@@ -618,34 +674,74 @@ class Display {
 				let listTodoLen = listArray[i].todos.length;
 				
 				//Cycles through each todo and appends them into the todo-view and adds them into a array
+
 					for (let j = 0; j < listTodoLen; j++) {
 						let thisTodoObj = thisList.todos[j];
 
-						todoArray.push(thisTodoObj);
+						newTodoArray
+						.push(thisTodoObj);
 
-						let thisTodoDate = thisTodoObj.dueDate;
-						
-						const todaysDate = formatISO(new Date());
-						const resultTodoDate = new Date(thisTodoDate).toISOString();
-
-						let parsedTodayDate = parseISO(todaysDate);
-						let parsedTodoDate = parseISO(resultTodoDate);
-
-						console.log(parsedTodayDate);
-						console.log(parsedTodoDate);
-
-						//if 1 returned first date is after the second, -1 first date is before, 0 dates are equal
-
-						
-						console.log(compareAsc(parsedTodayDate,parsedTodoDate));
-						
 						
 					}
 					
 				}
-				//!NOTE create a compare function that uses compareAsc on todos date property
-				console.log('this workied');
-				bubbleSort(todoArray);
+
+				//Sorting function.
+				bubbleSort(newTodoArray);
+				
+				this.clearTodoView();
+	
+					const todoView = document.querySelector(".todo-view");
+			
+						console.log(newTodoArray);
+						
+							for (let j = 0; j < newTodoArray.length; j++) {
+			
+								const todoContainer = document.createElement("div");
+								const todoTopDiv = document.createElement("div");
+								const todoBotDiv = document.createElement("div");
+			
+								const title = document.createElement("h1");
+								const description = document.createElement("p");
+								const dueDate = document.createElement("p");
+								const priority = document.createElement("p");
+								const edit = document.createElement("button");
+								const deleteTodo = document.createElement("button");
+			
+								title.textContent = newTodoArray[j].title;
+								description.textContent = newTodoArray[j].description;
+								dueDate.textContent = newTodoArray[j].dueDate;
+								priority.textContent = newTodoArray[j].priority;
+								edit.textContent = "Edit";
+								deleteTodo.textContent = "Delete";
+								// Container Attributes
+								todoContainer.setAttribute("class", "todo-obj");
+								todoTopDiv.setAttribute("class", "todo-top-div");
+								todoBotDiv.setAttribute("class", "todo-bot-div");
+								//Element Attributes
+								title.setAttribute("class", "todo-items todo-title");
+								description.setAttribute("class", "todo-items todo-desc");
+								dueDate.setAttribute("class", "todo-items todo-duedate");
+								priority.setAttribute("class", "todo-items todo-priority");
+								edit.setAttribute("class", "todo-items todo-edit");
+								deleteTodo.setAttribute("class", "todo-items todo-delete");
+			
+								todoTopDiv.append(title);
+								todoTopDiv.append(priority);
+								todoBotDiv.append(dueDate);
+								todoBotDiv.append(description);
+								todoBotDiv.append(edit);
+								todoBotDiv.append(deleteTodo);
+			
+								todoContainer.append(todoTopDiv);
+								todoContainer.append(todoBotDiv);
+			
+								todoView.append(todoContainer);
+							}
+				
+							//todo: needs to update display todo count 
+
+				console.log('this worked');
 				
 				
 			})
@@ -657,7 +753,44 @@ class Display {
 	}
 
 	displayTodayTasks(){
+		
+		const todayTasksBtn = document.getElementById('today-tasks');
 
+		todayTasksBtn.addEventListener('click',()=> {
+			
+			let todayTodoTasks = [];
+			
+			 for (let i = 0; i < listArray.length; i++) {
+				
+				console.log(listArray);
+				//listTitle is being used to hold value of the list title to check if it matches the selected list.
+				let listTitle = listArray[i].title;
+				let thisList = listArray[i];
+				let listTodoLen = listArray[i].todos.length; 
+				
+				for (let j = 0; j < listTodoLen; j++) {
+					
+					let thisTodoObj = thisList.todos[j];
+					let todoDate = thisTodoObj.dueDate;
+					
+
+					const parsedTodoDate = parseISO(new Date(todoDate).toISOString());
+
+					//checks if date of todo is today and returns true or false
+					let dateResult = isToday(parsedTodoDate);
+
+
+					if (dateResult) {
+						todayTodoTasks.push(thisTodoObj);
+					}
+					
+				}
+				
+				
+			}
+			this.displayTodoTasks(todayTodoTasks);
+
+		})
 	}
 
 	displayPrioTasks(){
