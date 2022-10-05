@@ -1,7 +1,7 @@
 import {parseISO, compareAsc} from "date-fns";
 export function bubbleSort(args) {
     
-
+    //Loop through array elements
     for (let index = 0; index < args.length; index++) {
         let secondEleIndex = index + 1;
         const firstTodoElement = args[index];

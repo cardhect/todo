@@ -1,8 +1,8 @@
 import { Conductor } from "./todoDataConductor";
 import { listArray } from "./listArrayTracker";
-import { beTarask } from "date-fns/locale";
-import { compareAsc, format, formatISO, parse, parseISO, isToday } from "date-fns";
+import { compareAsc, format, formatISO, parse, parseISO, isToday, isPast} from "date-fns";
 import { bubbleSort } from "./bubbleSort";
+import { sortByPrio } from "./sortByPrio";
 
 class Display {
 	constructor() {
@@ -324,6 +324,11 @@ class Display {
 		defaultList.setAttribute("class", "list-option");
 		defaultList.textContent = captureList;
 		listView.append(defaultList);
+		
+		defaultList.addEventListener("click", (e) => {
+			this.clearTodoView();
+			this.displaySelectedList(e);
+		});
 
 		const listSubmit = document.getElementById("list-form-btn");
 		listSubmit.addEventListener("click", (event) => {
@@ -674,13 +679,26 @@ class Display {
 				let listTodoLen = listArray[i].todos.length;
 				
 				//Cycles through each todo and appends them into the todo-view and adds them into a array
-
 					for (let j = 0; j < listTodoLen; j++) {
+
+
 						let thisTodoObj = thisList.todos[j];
-
-						newTodoArray
-						.push(thisTodoObj);
-
+ 						
+						const parsedDate = parseISO(new Date(thisTodoObj.dueDate).toISOString());
+						 console.log(isPast(parsedDate));
+						
+						//Checks if date is in the past. will exclude it if it is.
+						if (isPast(parsedDate)) {
+							console.log('date is in the past.')
+						} else {
+							newTodoArray
+							.push(thisTodoObj);
+						}
+						//checks if date is today since isPast() function will return false.
+						if (isToday(parsedDate)) {
+							newTodoArray
+							.push(thisTodoObj);
+						}
 						
 					}
 					
@@ -745,11 +763,6 @@ class Display {
 				
 				
 			})
-			//Display each tasks in order from closest date to furthest.
-		//I will need to grab all task
-
-		//put task into a new array in order of closest to furthest.
-		//display tasks in that order.
 	}
 
 	displayTodayTasks(){
@@ -757,14 +770,15 @@ class Display {
 		const todayTasksBtn = document.getElementById('today-tasks');
 
 		todayTasksBtn.addEventListener('click',()=> {
-			
+			//updates title to Today
+			const viewTitle = document.querySelector('.header__list-title');
+			viewTitle.textContent = 'Today';
+
 			let todayTodoTasks = [];
 			
 			 for (let i = 0; i < listArray.length; i++) {
 				
 				console.log(listArray);
-				//listTitle is being used to hold value of the list title to check if it matches the selected list.
-				let listTitle = listArray[i].title;
 				let thisList = listArray[i];
 				let listTodoLen = listArray[i].todos.length; 
 				
@@ -782,6 +796,8 @@ class Display {
 
 					if (dateResult) {
 						todayTodoTasks.push(thisTodoObj);
+					} else {
+						console.log('no date on this task');
 					}
 					
 				}
@@ -794,9 +810,38 @@ class Display {
 	}
 
 	displayPrioTasks(){
+			
+		const importantTaskBtn = document.getElementById('prio-tasks');
 
+		importantTaskBtn.addEventListener('click', ()=> {
+			
+			let importantTasks = [];
+
+			//updates title to Important
+			const viewTitle = document.querySelector('.header__list-title');
+			viewTitle.textContent = 'Important';
+			
+			 for (let i = 0; i < listArray.length; i++) {
+				
+				console.log(listArray);
+				let thisList = listArray[i];
+				let listTodoLen = listArray[i].todos.length; 
+				
+				for (let j = 0; j < listTodoLen; j++) {
+					
+					let thisTodoObj = thisList.todos[j];
+					importantTasks.push(thisTodoObj);
+					//write function that sorts tasks by prio. from highest to smallest.
+				 
+				}
+				
+				
+			}
+			importantTasks = sortByPrio(importantTasks)
+			this.displayTodoTasks(importantTasks);
+
+		})
 	}
+
 }
-
-
 export { Display };

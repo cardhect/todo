@@ -30,5 +30,8 @@ display.editForm();
 display.displayAllTasks();
 display.displayUpcomingTasks();
 display.displayTodayTasks();
-//TODO add ability to change lists in edit form
-//TODO fix edit form css
+display.displayPrioTasks();
+
+
+//TODO work on CSS
+//TODO Add local storage.
