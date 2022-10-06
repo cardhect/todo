@@ -7,6 +7,14 @@ body {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
+button:hover{
+    background-color: aliceblue;
+}
+
+@font-face {
+    font-family: SYN Nova;
+    src: url(SYNNova-Regular.otf);
+}
 
 #todo-form {
     color: black;
@@ -34,6 +42,16 @@ body {
 }
 
 /* Left Side CSS */
+#app-name{
+    font-size: 3em;
+    text-align: left;
+    margin-left: 5px;
+    margin-top: 5px;
+    color: rgb(255, 255, 255);
+    font-family: SYN Nova;
+
+}
+
 .left-box {
     width: 30%;
     background-color: rgb(128, 128, 128);
@@ -49,24 +67,38 @@ body {
     justify-content: center;
     padding: 10px;
     flex-direction: column;
-
+    border-radius: 10px;
 }
 
 .box__item {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 45%;
     width: 45%;
     margin: 3px;
 }
 
+#lists-all-names{
+
+}
+
 .list-view {
-    height: 50%;
-    border: 1px solid red;
+    height: 43%;
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    margin: 5px;
 }
 
+.list-option{
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    width: 150px;
+    height: 40px;
+    font-size: 15px;
+    border: 2px solid rgb(79 155 255);
+}
 
 /* Right side css */
 .right-box {
@@ -83,11 +115,15 @@ body {
     margin-right: 20px;
 }
 
+#list-view-title{
+    border-bottom: 1px solid grey;
+}
+
 
 .todo-view {
     height: 86%;
     width: auto;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     overflow-y:auto
 
 }
@@ -206,6 +242,8 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    border-top: 1px solid gray;
+    padding: 5px;
 }
 .add-todo-container>p{
     margin: 0;
@@ -215,8 +253,13 @@ body {
 
 /* View Buttons  */
 .view-button {
-    width: 100px;
-    height: 100px;
+    width: 145px;
+    height: 145px;
+    margin: 5px;
+    border-radius: 20px;
+    box-shadow: none;
+    border: 4px solid gray;
+    font-size: 1em;
 }
 
 .top-btn-container{
