@@ -4,7 +4,7 @@ import {Conductor} from './todoDataConductor';
 //Holds created arrays
 import {listArray} from "./listArrayTracker.js";
 import {format} from 'date-fns';
-
+import {saveToLocalStorage} from './saveToLocalStorage';
 //Dom controller
 let display = new Display();
 //Data Manipulator
@@ -33,5 +33,3 @@ display.displayTodayTasks();
 display.displayPrioTasks();
 
 
-//TODO work on CSS
-//TODO Add local storage.

@@ -3,6 +3,8 @@ import { listArray } from "./listArrayTracker";
 import { Display } from "./display";
 import { List } from "./createList";
 import {format} from 'date-fns';
+import {saveToLocalStorage} from './saveToLocalStorage';
+
 class Conductor {
 	constructor() {
 		this.todoData = []; //I want to access this array in method.
@@ -174,6 +176,7 @@ class Conductor {
 			const list = listArray[index];
 			if (list.title == selectedList) {
 				conductor.pushToList(listArray[index]);
+				saveToLocalStorage();
 			} else {
 				console.log("Code exit 1");
 			}
