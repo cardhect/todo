@@ -5,7 +5,7 @@ class List {
         this.todos = [];
     }
     //adds given obj to list array
-    add(todo){
+    add(todo){ //! Issue when page is refreshed and new todo is added this method does not exist yet.
         this.todos.push(todo);
     }
 

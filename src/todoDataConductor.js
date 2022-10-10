@@ -147,9 +147,9 @@ class Conductor {
 			
 	}
 
-	pushToList(list) {
+	pushToList(givenlist) {
 		let todoDataLen = this.todoData.length;
-		list.add(this.todoData[todoDataLen - 1]);
+		givenlist.add(this.todoData[todoDataLen - 1]);
 		// list.remove();
 	}
 
