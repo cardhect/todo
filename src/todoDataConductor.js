@@ -34,9 +34,9 @@ class Conductor {
 			formatedDate = format(new Date(dueDate.replace(/-/g, '/')), 'M/d/yy');
 		} else {
 			formatedDate = '';
-			console.log('no date given');
+			
 		}
-		// console.log(dates);
+		// 
 
 
 
@@ -76,9 +76,9 @@ class Conductor {
 			formatedDate = format(new Date(dueDate), 'M/d/yy');
 		} else {
 			formatedDate = '';
-			console.log('no date given');
+			
 		}
-		// console.log(dates);
+		// 
 
 
 
@@ -100,7 +100,7 @@ class Conductor {
 		
 	updateTodo(todoTitle){
 			
-			console.log(listArray);
+			
 			//Edited data from edit form.
 			let newTitle = this.grabEditFromData().title;
 			let newDesc = this.grabEditFromData().description;
@@ -169,7 +169,7 @@ class Conductor {
 		let collection = lists.selectedOptions;
 
 		let selectedList = collection[0].label;
-		console.log("todo was inserted in: " + selectedList);
+		
 
 		//Inserts data to selected list when submitted.
 		for (let index = 0; index < listArray.length; index++) {
@@ -178,7 +178,7 @@ class Conductor {
 				conductor.pushToList(listArray[index]);
 				saveToLocalStorage();
 			} else {
-				console.log("Code exit 1");
+				
 			}
 		}
 	}
@@ -213,7 +213,7 @@ class Conductor {
 		for (let index = 0; index < deleteButtons.length; index++) {
 			deleteButtons[index].addEventListener("click", (event) => {
 				const todoElement = event.path[2];
-				console.log(event);
+				
 				
 				todoView.removeChild(todoElement);
 
@@ -227,10 +227,10 @@ class Conductor {
 					if (listTitle == listArray[i].title) {
 						listToRemoveFrom.remove(deletedTodo);
 						display.displayTodoAmount();
-						console.log(listToRemoveFrom);
-						console.log(listArray);
+						
+						
 					} else {
-						console.log("Title didnt match");
+						
 					}
 				}
 			});
@@ -245,9 +245,8 @@ class Conductor {
 			const element = todoEditBtns[i];
 
 			element.addEventListener('click',(e)=>{
-				console.log('you clicked a edit button bby');
+				
 				const formEle = document.getElementById('edit-modal');
-				console.log(formEle);
 				formEle.style.display = 'block';
 				//Title works
 					const title = e.target.parentElement.parentElement.childNodes[0].childNodes[0].innerText;
@@ -255,7 +254,11 @@ class Conductor {
 					const desc = e.target.parentNode.parentNode.childNodes[1].childNodes[1].innerText;
 					//due date works
 					const dueDate = e.target.parentNode.parentNode.childNodes[1].childNodes[0].innerText;
-					let formatedDate = format(new Date(dueDate), 'yyyy-MM-dd');
+					
+					let formatedDate = '';
+					if (dueDate.length > 0) {
+						formatedDate = format(new Date(dueDate), 'yyyy-MM-dd');
+					}
 
 					//Prio works
 					const prio = e.target.parentNode.parentNode.childNodes[0].childNodes[1].innerText;
@@ -316,7 +319,7 @@ class Conductor {
 	// 				for (let j = 0; j < listTodos.length; j++) {
 	// 					const thisTodoTitle = listTodos[j].title;
 	// 					if (thisTodoTitle == todoObjTitle) {
-	// 						console.log('we are at the correct todo!');
+	// 						
 	// 					}
 	// 				}
 	// 			}

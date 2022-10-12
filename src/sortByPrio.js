@@ -11,7 +11,7 @@ export function sortByPrio(args) {
         if (elementPrio == 'high') {
             sortedArray.push(element);
         }
-        console.log(sortedArray);
+        
     }
 
 
@@ -22,7 +22,7 @@ export function sortByPrio(args) {
         if (elementPrio == 'med') {
             sortedArray.push(element);
         }
-        console.log(sortedArray);
+        
         
     }
 
@@ -33,7 +33,7 @@ export function sortByPrio(args) {
         if (elementPrio == 'low') {
             sortedArray.push(element);
         }
-        console.log(sortedArray);
+        
         
     }
 

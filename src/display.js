@@ -3,6 +3,7 @@ import { listArray } from "./listArrayTracker";
 import { compareAsc, format, formatISO, parse, parseISO, isToday, isPast} from "date-fns";
 import { bubbleSort } from "./bubbleSort";
 import { sortByPrio } from "./sortByPrio";
+import {saveToLocalStorage} from "./saveToLocalStorage";
 
 class Display {
 	constructor() {
@@ -136,7 +137,7 @@ class Display {
 				dataCond.removeTodo();
 				self.formReset();
 			} else {
-				console.log("not currently in correct list view");
+				
 				self.formReset();
 			}
 		});
@@ -249,7 +250,7 @@ class Display {
 		const makeChangesBtn = document.getElementById('edit-form-btn');
 		let self = this;
 		makeChangesBtn.addEventListener('click',()=>{
-			console.log('changes were made...')
+			
 			self.editFormModal();
 		})
 	}
@@ -308,7 +309,7 @@ class Display {
 		submit.setAttribute("id", "list-form-btn");
 		form.appendChild(submit);
 	}
-
+	
 	formReset() {
 		document.getElementById("todo-form").reset();
 	}
@@ -318,28 +319,59 @@ class Display {
 
 	displayListButtons() {
 		//Displays default Capture list in list view.
-		const listView = document.querySelector(".list-view");
-		const captureList = listArray[0].title;
-		const defaultList = document.createElement("button");
-		defaultList.setAttribute("class", "list-option");
-		defaultList.textContent = captureList;
-		listView.append(defaultList);
+		const listContainer = document.querySelector(".list__container");
+
+		const initialList = document.querySelector('.list-option');
+
+		if (initialList == null) {
+			const captureList = listArray[0].title;
+			const defaultList = document.createElement("button");
+			defaultList.setAttribute("class", "list-option");
+			defaultList.textContent = captureList;
+			listContainer.append(defaultList);
+			
+			defaultList.addEventListener("click", (e) => {
+				this.clearTodoView();
+				this.displaySelectedList(e);
+			});
+		}
+
+		//creates lists buttons if there are list on local storage.
+		for (let i = 1; i < listArray.length; i++) {
+			const listName = listArray[i].title;
+			
+			
+			const inputList = document.createElement("button");
+			inputList.setAttribute("class", "list-option");
+			inputList.textContent = listName;
+			listContainer.append(inputList);
+
+
+		}
+		const localListOptions = document.querySelectorAll(".list-option");
+
+			for (let index = 0; index < localListOptions.length; index++) {
+				const element = localListOptions[index];
+				element.addEventListener("click", (e) => {
+					this.clearTodoView();
+					this.displaySelectedList(e);
+				});
+			}
 		
-		defaultList.addEventListener("click", (e) => {
-			this.clearTodoView();
-			this.displaySelectedList(e);
-		});
 
 		const listSubmit = document.getElementById("list-form-btn");
 		listSubmit.addEventListener("click", (event) => {
-			console.log(event);
+			
 			let listArrayLen = listArray.length;
 			let newList = listArray[listArrayLen - 1].title;
 			const inputList = document.createElement("button");
 			inputList.setAttribute("class", "list-option");
 			inputList.textContent = newList;
-			listView.append(inputList);
-
+			listContainer.append(inputList);
+			
+			saveToLocalStorage();
+			console.log(listArray);
+			
 			//Adding event listener to each list button that will run to display todos when clicked.
 			const listOptions = document.querySelectorAll(".list-option");
 
@@ -358,7 +390,7 @@ class Display {
 		//the list that was clicked.
 
 		this.selectedList = e.target.innerText;
-		console.log("Selected List: " + this.selectedList);
+		
 
 		const listTitle = document.querySelector(".header__list-title");
 		listTitle.textContent = this.selectedList;
@@ -376,8 +408,8 @@ class Display {
 		const todoView = document.querySelector(".todo-view");
 
 		for (let i = 0; i < listArray.length; i++) {
-			console.log("list array len: " + listArray.length);
-			console.log(listArray);
+			
+			
 			//listTitle is being used to hold value of the list title to check if it matches the selected list.
 			let listTitle = listArray[i].title;
 			let thisList = listArray[i];
@@ -430,7 +462,7 @@ class Display {
 					todoView.append(todoContainer);
 				}
 			} else {
-				console.log("there are no todos to display");
+				
 			}
 		}
 	}
@@ -443,7 +475,7 @@ class Display {
 			const listTodoLen = listArray[i].todos.length;
 
 			if (listTitle == this.selectedList) {
-				console.log(listTitle + " " + this.selectedList + " matches");
+				
 				const counter = document.getElementById("header__todo-amount");
 				counter.textContent = listTodoLen;
 			}
@@ -452,7 +484,7 @@ class Display {
 				".header__list-title"
 			).textContent;
 			if (listTitle == defaultList) {
-				console.log("list wasn't changed.");
+				
 				const counter = document.getElementById("header__todo-amount");
 				counter.textContent = listTodoLen;
 			}
@@ -542,8 +574,8 @@ class Display {
 	
 				//Update todo view with all todos
 				for (let i = 0; i < listArray.length; i++) {
-					console.log("list array len: " + listArray.length);
-					console.log(listArray);
+					
+					
 					//listTitle is being used to hold value of the list title to check if it matches the selected list.
 					let listTitle = listArray[i].title;
 					let thisList = listArray[i];
@@ -609,7 +641,7 @@ class Display {
 	
 					const todoView = document.querySelector(".todo-view");
 			
-						console.log(todoArray);
+						
 						
 							for (let j = 0; j < todoArray.length; j++) {
 			
@@ -672,7 +704,7 @@ class Display {
 			//Cycle through lists
 			for (let i = 0; i < listArray.length; i++) {
 		
-				console.log(listArray);
+				
 				//listTitle is being used to hold value of the list title to check if it matches the selected list.
 				let listTitle = listArray[i].title;
 				let thisList = listArray[i];
@@ -685,11 +717,11 @@ class Display {
 						let thisTodoObj = thisList.todos[j];
  						
 						const parsedDate = parseISO(new Date(thisTodoObj.dueDate).toISOString());
-						 console.log(isPast(parsedDate));
+						 
 						
 						//Checks if date is in the past. will exclude it if it is.
 						if (isPast(parsedDate)) {
-							console.log('date is in the past.')
+							
 						} else {
 							newTodoArray
 							.push(thisTodoObj);
@@ -711,7 +743,7 @@ class Display {
 	
 					const todoView = document.querySelector(".todo-view");
 			
-						console.log(newTodoArray);
+						
 						
 							for (let j = 0; j < newTodoArray.length; j++) {
 			
@@ -759,7 +791,7 @@ class Display {
 				
 							//todo: needs to update display todo count 
 
-				console.log('this worked');
+				
 				
 				
 			})
@@ -778,7 +810,7 @@ class Display {
 			
 			 for (let i = 0; i < listArray.length; i++) {
 				
-				console.log(listArray);
+				
 				let thisList = listArray[i];
 				let listTodoLen = listArray[i].todos.length; 
 				
@@ -797,7 +829,7 @@ class Display {
 					if (dateResult) {
 						todayTodoTasks.push(thisTodoObj);
 					} else {
-						console.log('no date on this task');
+						
 					}
 					
 				}
@@ -823,7 +855,7 @@ class Display {
 			
 			 for (let i = 0; i < listArray.length; i++) {
 				
-				console.log(listArray);
+				
 				let thisList = listArray[i];
 				let listTodoLen = listArray[i].todos.length; 
 				

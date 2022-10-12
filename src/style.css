@@ -77,9 +77,6 @@ button:hover{
     margin: 3px;
 }
 
-#lists-all-names{
-
-}
 
 .list-view {
     height: 43%;
@@ -88,6 +85,11 @@ button:hover{
     flex-direction: column;
     align-items: flex-start;
     margin: 5px;
+}
+
+.list__container {
+    display: flex;
+    flex-direction: column;
 }
 
 .list-option{

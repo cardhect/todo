@@ -6,13 +6,16 @@ export function saveToLocalStorage() {
  
 if (storageAvailable('localStorage')) {
     // Yippee! We can use localStorage awesomeness
-    console.log('localStorage is ready.');
+    
     localStorage.clear();
     
     //stores the listArray in localStorage as a string. 
     window.localStorage.setItem("savedListArray", JSON.stringify(listArray));
 
-    console.log('Data was saved to localStorage.');
+    
+    
+    
+ 
   }
   else {
     // Too bad, no localStorage for us

@@ -10,8 +10,8 @@ class List {
     }
 
     remove(deletedTodo){
-        console.log('remove() function worked.');
-        console.log(this.todos);
+        
+        
         for( let i = 0; i < this.todos.length; i++){ 
                                    
             if ( this.todos[i].title === deletedTodo) { 
@@ -19,7 +19,7 @@ class List {
                 i--; 
             }
         }
-        console.log(this.todos);
+        
     }
 
 
