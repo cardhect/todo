@@ -3,7 +3,6 @@ import {Display} from "./display"
 import {Conductor} from './todoDataConductor';
 //Holds created arrays
 import {listArray} from "./listArrayTracker.js";
-import {format} from 'date-fns';
 import {grabFromLocalStorage} from './grabFromLocalStorage';
 //Dom controller
 let display = new Display();
@@ -33,3 +32,8 @@ display.displayTodayTasks();
 display.displayPrioTasks();
 
 grabFromLocalStorage();
+
+
+//* BUG lists retrieved from local storage does not appear in the list options drop down in the add todo modal.
+
+//* TODO add delete buttons for lists.

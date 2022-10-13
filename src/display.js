@@ -1,8 +1,8 @@
-import { Conductor } from "./todoDataConductor";
-import { listArray } from "./listArrayTracker";
-import { compareAsc, format, formatISO, parse, parseISO, isToday, isPast} from "date-fns";
-import { bubbleSort } from "./bubbleSort";
-import { sortByPrio } from "./sortByPrio";
+import {Conductor} from "./todoDataConductor";
+import {listArray} from "./listArrayTracker";
+import {isPast, isToday, parseISO} from "date-fns";
+import {bubbleSort} from "./bubbleSort";
+import {sortByPrio} from "./sortByPrio";
 import {saveToLocalStorage} from "./saveToLocalStorage";
 
 class Display {
@@ -24,7 +24,7 @@ class Display {
 		//each element displays different inputs based on their needed data.
 		for (let i = 0; i < inputArray.length; i++) {
 			const element = inputArray[i];
-			if (element == "title") {
+			if (element === "title") {
 				let label = document.createElement("label");
 				label.setAttribute("for", "title");
 				label.textContent = "Title:";
@@ -35,7 +35,7 @@ class Display {
 				form.appendChild(label);
 				form.appendChild(input);
 			}
-			if (element == "description") {
+			if (element === "description") {
 				let label = document.createElement("label");
 				label.setAttribute("for", "description");
 				label.textContent = "Description:";
@@ -46,7 +46,7 @@ class Display {
 				form.appendChild(label);
 				form.appendChild(input);
 			}
-			if (element == "dueDate") {
+			if (element === "dueDate") {
 				let label = document.createElement("label");
 				label.setAttribute("for", "due-date");
 				label.textContent = "Due Date:";
@@ -58,7 +58,7 @@ class Display {
 				form.appendChild(input);
 			}
 			//change this to radio with 3 priority options low med high
-			if (element == "priority") {
+			if (element === "priority") {
 				let array = ["low", "med", "high"];
 				let fieldSet = document.createElement('fieldset');
 				let label = document.createElement("label");
@@ -83,7 +83,7 @@ class Display {
 					fieldSet.appendChild(label);
 				}
 			}
-			if (element == "list") {
+			if (element === "list") {
 				let label = document.createElement("label");
 				label.setAttribute("for", "List");
 				label.textContent = "List:";
@@ -99,10 +99,8 @@ class Display {
 					const option = document.createElement("option");
 					option.setAttribute("value", listArray[i].title);
 					option.setAttribute("class", "list-value");
-					const capitalizedList =
-						listArray[i].title.charAt(0).toUpperCase() +
+					option.textContent = listArray[i].title.charAt(0).toUpperCase() +
 						listArray[i].title.slice(1);
-					option.textContent = capitalizedList;
 					select.append(option);
 				}
 			}
@@ -120,7 +118,7 @@ class Display {
 			self.displayTodoAmount();
 			dataCond.todoEditButtonListener();
 			// grabs the selected list in the options in the form
-			let lists = document.getElementById("list");
+
 			// let collection = lists.selectedOptions;
 
 			const currentList = document.querySelector(
@@ -129,7 +127,7 @@ class Display {
 			
 			const selectedList = document.getElementById("list").value;
 
-			if (selectedList == currentList) {
+			if (selectedList === currentList) {
 				self.clearTodoView();
 				self.displayTodo();
 				self.editFormModal();
@@ -143,7 +141,7 @@ class Display {
 		});
 	}
 	editForm(){
-		let dataCond = new Conductor();
+
 		let inputArray = ["title", "description", "dueDate", "priority", "list"];
 
 		const form = document.createElement("form");
@@ -155,7 +153,7 @@ class Display {
 		//each element displays different inputs based on their needed data.
 		for (let i = 0; i < inputArray.length; i++) {
 			const element = inputArray[i];
-			if (element == "title") {
+			if (element === "title") {
 				let label = document.createElement("label");
 				label.setAttribute("for", "edit-title");
 				label.textContent = "Title:";
@@ -169,7 +167,7 @@ class Display {
 				form.appendChild(label);
 				form.appendChild(input);
 			}
-			if (element == "description") {
+			if (element === "description") {
 				let label = document.createElement("label");
 				label.setAttribute("for", "edit-description");
 				label.textContent = "Description:";
@@ -180,7 +178,7 @@ class Display {
 				form.appendChild(label);
 				form.appendChild(input);
 			}
-			if (element == "dueDate") {
+			if (element === "dueDate") {
 				let label = document.createElement("label");
 				label.setAttribute("for", "edit-due-date");
 				label.textContent = "Due Date:";
@@ -192,7 +190,7 @@ class Display {
 				form.appendChild(input);
 			}
 			//change this to radio with 3 priority options low med high
-			if (element == "priority") {
+			if (element === "priority") {
 				let array = ["low", "med", "high"];
 				let fieldSet = document.createElement('fieldset');
 				let label = document.createElement("label");
@@ -217,7 +215,7 @@ class Display {
 					fieldSet.appendChild(label);
 				}
 			}
-			if (element == "list") {
+			if (element === "list") {
 				let label = document.createElement("label");
 				label.setAttribute("for", "List");
 				label.textContent = "List:";
@@ -233,10 +231,8 @@ class Display {
 					const option = document.createElement("option");
 					option.setAttribute("value", listArray[i].title);
 					option.setAttribute("class", "list-value");
-					const capitalizedList =
-						listArray[i].title.charAt(0).toUpperCase() +
+					option.textContent = listArray[i].title.charAt(0).toUpperCase() +
 						listArray[i].title.slice(1);
-					option.textContent = capitalizedList;
 					select.append(option);
 				}
 			}
@@ -269,13 +265,13 @@ class Display {
 		descInput.value = desc;
 		dueDateInput.value = dueDate;
 		
-		if (prio == 'low'){
+		if (prio === 'low'){
 			prioLow.checked = true;
 			
-		} else if (prio == 'med') {
+		} else if (prio === 'med') {
 			prioMed.checked = true;
 			
-		} else if (prio == 'high') {
+		} else if (prio === 'high') {
 			prioHigh.checked = true;
 			
 		}
@@ -313,9 +309,9 @@ class Display {
 	formReset() {
 		document.getElementById("todo-form").reset();
 	}
-	editFormReset() {	
-		document.getElementById("edit-form").reset();
-	}
+	// editFormReset() {
+	// 	document.getElementById("edit-form").reset();
+	// }
 
 	displayListButtons() {
 		//Displays default Capture list in list view.
@@ -325,17 +321,32 @@ class Display {
 
 		if (initialList == null) {
 			const captureList = listArray[0].title;
+			const listBtnContainer = document.createElement('div');
+			listBtnContainer.setAttribute('class','list-buttons');
+
 			const defaultList = document.createElement("button");
+			//create container for list and its delete button.
+
+			const listDeleteButton = document.createElement("button");
+			listDeleteButton.textContent = "Delete List"
+			listDeleteButton.setAttribute("class","list-delete-btn");
+
+
 			defaultList.setAttribute("class", "list-option");
 			defaultList.textContent = captureList;
-			listContainer.append(defaultList);
+
+			listBtnContainer.append(defaultList)
+			listBtnContainer.append(listDeleteButton);
+			console.log("testing het");
+			listContainer.append(listBtnContainer);
 			
 			defaultList.addEventListener("click", (e) => {
 				this.clearTodoView();
 				this.displaySelectedList(e);
+				this.deleteList();
 			});
 		}
-
+	console.log("welcome");
 		//creates lists buttons if there are list on local storage.
 		for (let i = 1; i < listArray.length; i++) {
 			const listName = listArray[i].title;
@@ -355,12 +366,13 @@ class Display {
 				element.addEventListener("click", (e) => {
 					this.clearTodoView();
 					this.displaySelectedList(e);
+					this.deleteList();
 				});
 			}
 		
 
 		const listSubmit = document.getElementById("list-form-btn");
-		listSubmit.addEventListener("click", (event) => {
+		listSubmit.addEventListener("click", () => {
 			
 			let listArrayLen = listArray.length;
 			let newList = listArray[listArrayLen - 1].title;
@@ -401,6 +413,23 @@ class Display {
 		dataCond.removeTodo();
 	}
 
+	deleteList() {
+		const listDeleteBtn = document.querySelectorAll('.list-delete-btn');
+
+		for (let i = 0; i < listDeleteBtn.length ; i++) {
+			//on click delete the list from the view
+			//delete the list from the listArray object
+			//update the view
+			//update the localStorage with removed data.
+			let deleteBtnElement = listDeleteBtn[i];
+			//fixme this event listener is only being set when the list button is clicked.
+			deleteBtnElement.addEventListener('click', ()=> {
+				console.log('Delete button was clicked!');
+			})
+
+		}
+	}
+
 	displayTodo() {
 		const currentList = document.querySelector(
 			".header__list-title"
@@ -416,7 +445,7 @@ class Display {
 			let listTodoLen = listArray[i].todos.length;
 			
 			// const selectedList = document.getElementById("list").value;
-			if (currentList == listTitle && listTodoLen > 0) {
+			if (currentList === listTitle && listTodoLen > 0) {
 				for (let j = 0; j < listTodoLen; j++) {
 					// const element = listArray.todos[index];
 
@@ -474,7 +503,7 @@ class Display {
 			const listTitle = listArray[i].title;
 			const listTodoLen = listArray[i].todos.length;
 
-			if (listTitle == this.selectedList) {
+			if (listTitle === this.selectedList) {
 				
 				const counter = document.getElementById("header__todo-amount");
 				counter.textContent = listTodoLen;
@@ -483,7 +512,7 @@ class Display {
 			let defaultList = document.querySelector(
 				".header__list-title"
 			).textContent;
-			if (listTitle == defaultList) {
+			if (listTitle === defaultList) {
 				
 				const counter = document.getElementById("header__todo-amount");
 				counter.textContent = listTodoLen;
@@ -497,13 +526,13 @@ class Display {
 	}
 
 	todoFormModal() {
-		var modal = document.getElementById("myModal");
+		let modal = document.getElementById("myModal");
 
 		// Get the button that opens the modal
-		var btn = document.querySelector(".todo-form-modal");
+		let btn = document.querySelector(".todo-form-modal");
 
 		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("close")[0];
+		let span = document.getElementsByClassName("close")[0];
 
 		// When the user clicks the button, open the modal
 		btn.onclick = function () {
@@ -515,21 +544,21 @@ class Display {
 			modal.style.display = "none";
 		};
 
-		// When the user clicks anywhere outside of the modal, close it
+		// When the user clicks outside the modal, close it
 		window.onclick = function (event) {
-			if (event.target == modal) {
+			if (event.target === modal) {
 				modal.style.display = "none";
 			}
 		};
 	}
 	editFormModal(){
-		var modal = document.getElementById("edit-modal");
+		let modal = document.getElementById("edit-modal");
 
 		// Get the button that opens the modal
-		var btn = document.querySelector(".todo-edit");
+		let btn = document.querySelector(".todo-edit");
 
 		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("edit-close")[0];
+		let span = document.getElementsByClassName("edit-close")[0];
 
 		// When the user clicks the button, open the modal
 		btn.onclick = function () {
@@ -544,7 +573,7 @@ class Display {
 		// When the user clicks anywhere outside of the modal, close it
 		//!todo Bug unable to exit edit since this func is not listening when in another list
 		window.onclick = function (event) {
-			if (event.target == modal) {
+			if (event.target === modal) {
 				modal.style.display = "none";
 			}
 		};
@@ -577,7 +606,7 @@ class Display {
 					
 					
 					//listTitle is being used to hold value of the list title to check if it matches the selected list.
-					let listTitle = listArray[i].title;
+
 					let thisList = listArray[i];
 					let listTodoLen = listArray[i].todos.length;
 					
@@ -706,7 +735,7 @@ class Display {
 		
 				
 				//listTitle is being used to hold value of the list title to check if it matches the selected list.
-				let listTitle = listArray[i].title;
+
 				let thisList = listArray[i];
 				let listTodoLen = listArray[i].todos.length;
 				
