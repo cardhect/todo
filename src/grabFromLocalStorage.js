@@ -3,7 +3,6 @@ import { storageAvailable } from "./storageAvailable";
 import { Display } from "./display";
 import { List } from "./createList";
 import { Todo } from "./createToDo";
-import { parse } from "date-fns";
 
 export function grabFromLocalStorage() {
 	let displayControl = new Display();

@@ -318,7 +318,7 @@ class Display {
 		const listContainer = document.querySelector(".list__container");
 
 		const initialList = document.querySelector('.list-option');
-
+		//creates default list if it is not there.
 		if (initialList == null) {
 			const captureList = listArray[0].title;
 			const listBtnContainer = document.createElement('div');
@@ -337,16 +337,13 @@ class Display {
 
 			listBtnContainer.append(defaultList)
 			listBtnContainer.append(listDeleteButton);
-			console.log("testing het");
 			listContainer.append(listBtnContainer);
 			
 			defaultList.addEventListener("click", (e) => {
 				this.clearTodoView();
 				this.displaySelectedList(e);
-				this.deleteList();
 			});
 		}
-	console.log("welcome");
 		//creates lists buttons if there are list on local storage.
 		for (let i = 1; i < listArray.length; i++) {
 			const listName = listArray[i].title;
@@ -359,6 +356,8 @@ class Display {
 
 
 		}
+
+		//Adds event listeners to list buttons pulled for local storage
 		const localListOptions = document.querySelectorAll(".list-option");
 
 			for (let index = 0; index < localListOptions.length; index++) {
@@ -370,7 +369,7 @@ class Display {
 				});
 			}
 		
-
+		//Adds event listeners to newly created list.
 		const listSubmit = document.getElementById("list-form-btn");
 		listSubmit.addEventListener("click", () => {
 			
@@ -395,6 +394,8 @@ class Display {
 				});
 			}
 		});
+
+		this.deleteList();
 	}
 
 	displaySelectedList(e) {
