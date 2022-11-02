@@ -5,9 +5,10 @@ import {bubbleSort} from "./bubbleSort";
 import {sortByPrio} from "./sortByPrio";
 import {saveToLocalStorage} from "./saveToLocalStorage";
 
+
 class Display {
 	constructor() {
-
+		const self = this;
 	}
 
 	//creates a the form needed from todo
@@ -304,6 +305,8 @@ class Display {
 		submit.setAttribute("value", "Submit");
 		submit.setAttribute("id", "list-form-btn");
 		form.appendChild(submit);
+
+
 	}
 	
 	formReset() {
@@ -352,7 +355,21 @@ class Display {
 			const inputList = document.createElement("button");
 			inputList.setAttribute("class", "list-option");
 			inputList.textContent = listName;
-			listContainer.append(inputList);
+
+			const listBtnContainer = document.createElement('div');
+			listBtnContainer.setAttribute('class','list-buttons');
+
+			listContainer.append(listBtnContainer);
+			listBtnContainer.append(inputList)
+
+
+			//adds delete button to newly created list
+			const listDeleteButton = document.createElement("button");
+			listDeleteButton.textContent = "Delete List"
+			listDeleteButton.setAttribute("class","list-delete-btn");
+
+			listBtnContainer.append(listDeleteButton);
+
 
 
 		}
@@ -362,27 +379,48 @@ class Display {
 
 			for (let index = 0; index < localListOptions.length; index++) {
 				const element = localListOptions[index];
+
 				element.addEventListener("click", (e) => {
 					this.clearTodoView();
 					this.displaySelectedList(e);
-					this.deleteList();
+
 				});
 			}
-		
+
+
+
+
+	}
+	AddEventListenerToListSubmit() {
+		const listContainer = document.querySelector(".list__container");
 		//Adds event listeners to newly created list.
 		const listSubmit = document.getElementById("list-form-btn");
 		listSubmit.addEventListener("click", () => {
-			
+
 			let listArrayLen = listArray.length;
 			let newList = listArray[listArrayLen - 1].title;
 			const inputList = document.createElement("button");
 			inputList.setAttribute("class", "list-option");
 			inputList.textContent = newList;
-			listContainer.append(inputList);
-			
+			const listBtnContainer = document.createElement('div');
+			listBtnContainer.setAttribute('class','list-buttons');
+
+			listContainer.append(listBtnContainer);
+			listBtnContainer.append(inputList)
+
+
+			//adds delete button to newly created list
+			const listDeleteButton = document.createElement("button");
+			listDeleteButton.textContent = "Delete List"
+			listDeleteButton.setAttribute("class","list-delete-btn");
+
+			listBtnContainer.append(listDeleteButton);
+			this.removeDeleteListListener();
+			this.addDeleteListListener();
+
 			saveToLocalStorage();
 			console.log(listArray);
-			
+
 			//Adding event listener to each list button that will run to display todos when clicked.
 			const listOptions = document.querySelectorAll(".list-option");
 
@@ -394,8 +432,6 @@ class Display {
 				});
 			}
 		});
-
-		this.deleteList();
 	}
 
 	displaySelectedList(e) {
@@ -414,7 +450,32 @@ class Display {
 		dataCond.removeTodo();
 	}
 
-	deleteList() {
+	removeFromArray = (e)=> {
+
+		console.log('Delete button was clicked');
+		const targetList = e.target.parentNode.firstChild.innerText;
+		console.log(targetList);
+		for (let i = 0; i < listArray.length; i++) {
+			const list = listArray[i].title
+			console.log(i);
+			console.log(listArray);
+			if (list === targetList){
+				listArray.splice(i,1);
+				console.log('you removed: ' + targetList);
+				console.table(listArray);
+				this.clearListView();
+				this.displayListButtons();
+				this.addDeleteListListener();
+
+				saveToLocalStorage();
+				break;
+			}
+
+		}
+	}
+
+	addDeleteListListener() {
+
 		const listDeleteBtn = document.querySelectorAll('.list-delete-btn');
 
 		for (let i = 0; i < listDeleteBtn.length ; i++) {
@@ -423,11 +484,21 @@ class Display {
 			//update the view
 			//update the localStorage with removed data.
 			let deleteBtnElement = listDeleteBtn[i];
-			//fixme this event listener is only being set when the list button is clicked.
-			deleteBtnElement.addEventListener('click', ()=> {
-				console.log('Delete button was clicked!');
-			})
 
+			deleteBtnElement.addEventListener('click', this.removeFromArray);
+		}
+	}
+
+	removeDeleteListListener(){
+		const listDeleteBtn = document.querySelectorAll('.list-delete-btn');
+
+		for (let i = 0; i < listDeleteBtn.length ; i++) {
+			//on click delete the list from the view
+			//delete the list from the listArray object
+			//update the view
+			//update the localStorage with removed data.
+			let deleteBtnElement = listDeleteBtn[i];
+			deleteBtnElement.removeEventListener('click',this.removeFromArray);
 		}
 	}
 
@@ -524,6 +595,11 @@ class Display {
 	clearTodoView() {
 		const todoView = document.querySelector(".todo-view");
 		todoView.innerHTML = "";
+	}
+
+	clearListView() {
+		const listView = document.querySelector('.list__container');
+		listView.innerHTML = '';
 	}
 
 	todoFormModal() {
@@ -907,3 +983,6 @@ class Display {
 
 }
 export { Display };
+
+//fixme date format changes on todo when edited.
+//fixme todo edit and delete button lose event listeners on refresh.

@@ -17,7 +17,7 @@ class Conductor {
 		}
 		
 	}
-
+	
 	grabFormData() {
 		const todoFormBtn = document.querySelector("#todo-form-btn");
 

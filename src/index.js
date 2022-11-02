@@ -19,8 +19,14 @@ display.listForm();
 
 //grabs todo data and inserts into list
 dataCond.createNewList();
-display.formReset();
 display.displayListButtons();
+//adds event listener to list-form-button
+display.AddEventListenerToListSubmit();
+grabFromLocalStorage();
+//adds event listener to delete buttons
+display.addDeleteListListener();
+
+display.formReset();
 display.todoFormModal();
 display.editForm();
 // dataCond.changeList();
@@ -31,9 +37,7 @@ display.displayUpcomingTasks();
 display.displayTodayTasks();
 display.displayPrioTasks();
 
-grabFromLocalStorage();
 
 
 //* BUG lists retrieved from local storage does not appear in the list options drop down in the add todo modal.
 
-//* TODO add delete buttons for lists.
