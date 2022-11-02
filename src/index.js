@@ -14,7 +14,6 @@ let defaultList = new List('Todo');
 listArray.push(defaultList);
 
 //Loads form
-display.todoForm();
 display.listForm();
 
 //grabs todo data and inserts into list
@@ -26,6 +25,7 @@ grabFromLocalStorage();
 //adds event listener to delete buttons
 display.addDeleteListListener();
 
+display.todoForm();
 display.formReset();
 display.todoFormModal();
 display.editForm();

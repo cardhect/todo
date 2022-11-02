@@ -19,7 +19,7 @@ class Conductor {
 	}
 	
 	grabFormData() {
-		const todoFormBtn = document.querySelector("#todo-form-btn");
+
 
 		let self = this;
 
@@ -61,9 +61,9 @@ class Conductor {
 	}
 
 	grabEditFromData(){
-		const editFormBtn = document.querySelector("#edit-form-btn");
 
-		let self = this;
+
+
 
 		//Grabs data from form to create todoObj.
 		const title = document.getElementById("edit-title").value;
@@ -71,14 +71,11 @@ class Conductor {
 		
 		//Grabs duedate and formats it.
 		const dueDate = document.getElementById("edit-due-date").value;
-		let formatedDate = '';
-		if (dueDate.length > 0) {
-			formatedDate = format(new Date(dueDate), 'M/d/yy');
-		} else {
-			formatedDate = '';
-			
-		}
-		// 
+		// let formatedDate = '';
+		// // if (dueDate.length > 0) {
+		// // 	formatedDate = format(new Date(dueDate), 'M/d/yy');
+		// // }
+
 
 
 
@@ -105,6 +102,7 @@ class Conductor {
 			let newTitle = this.grabEditFromData().title;
 			let newDesc = this.grabEditFromData().description;
 			let newDueDate = this.grabEditFromData().dueDate;
+			let formatedDate = format(new Date(newDueDate), 'M/d/yy');
 			let newPrio = this.grabEditFromData().priority;
 			
 			//atodoObj Node list
@@ -125,7 +123,7 @@ class Conductor {
 							//Update todo obj.
 							selectedTodo.title = newTitle;
 							selectedTodo.description = newDesc;
-							selectedTodo.dueDate = newDueDate;
+							selectedTodo.dueDate = formatedDate;
 							selectedTodo.priority = newPrio;
 							
 							//Update todo in todo view.
@@ -133,7 +131,7 @@ class Conductor {
 								
 								todoObjs[j].children[1].children[1].innerText = newDesc;
 								
-								todoObjs[j].children[1].children[0].innerText = newDueDate;
+								todoObjs[j].children[1].children[0].innerText = formatedDate;
 								
 								todoObjs[j].children[0].lastChild.innerText = newPrio;
 
@@ -159,10 +157,9 @@ class Conductor {
 
 	insertTodoIntoList() {
 		let conductor = this;
-		let display = new Display();
 		//Grabs data from
 		//Grabs form data and inserts it into the selected List
-		let formBtn = document.getElementById("todo-form-btn");
+
 
 		conductor.grabFormData();
 		let lists = document.getElementById("list");
@@ -177,8 +174,6 @@ class Conductor {
 			if (list.title == selectedList) {
 				conductor.pushToList(listArray[index]);
 				saveToLocalStorage();
-			} else {
-				
 			}
 		}
 	}
@@ -204,10 +199,10 @@ class Conductor {
 		});
 	}
 
-	removeTodo(list) {
+	removeTodo() {
 		const display = new Display();
 		let deleteButtons = document.querySelectorAll(".todo-delete");
-		let self = this;
+
 
 		const todoView = document.querySelector(".todo-view");
 		for (let index = 0; index < deleteButtons.length; index++) {
@@ -229,8 +224,6 @@ class Conductor {
 						display.displayTodoAmount();
 						
 						
-					} else {
-						
 					}
 				}
 			});
@@ -239,7 +232,7 @@ class Conductor {
 	todoEditButtonListener(){
 		const self = this;
 		const display = new Display();
- 		const todoEditBtns = document.querySelectorAll('.todo-edit');
+		const todoEditBtns = document.querySelectorAll('.todo-edit');
 
 		for (let i = 0; i < todoEditBtns.length; i++) {
 			const element = todoEditBtns[i];
@@ -267,8 +260,9 @@ class Conductor {
 					display.selectedTodoEdit(title,desc,formatedDate, prio);
 
 					//updates list options in edit form 
-					for (let i = 1; i < listArray.length; i++) {
-						const element = listArray[i].title;
+					const editListOptions = document.querySelector('#edit-list');
+					editListOptions.innerHTML = "";
+					for (let i = 0; i < listArray.length; i++) {
 						const option = document.createElement("option");
 						option.setAttribute("value", listArray[i].title);
 						option.setAttribute("class", "list-value");
@@ -287,8 +281,8 @@ class Conductor {
 					const makeChangesBtn = document.getElementById('edit-form-btn');
 
 					makeChangesBtn.addEventListener('click',()=>{
-						 self.updateTodo(title);
-						 
+						self.updateTodo(title);
+						
 						})
 						
 						
@@ -297,44 +291,6 @@ class Conductor {
 				}
 			}
 			
-	// changeList() {
-
-	// 	//Currently does not work when todo title is changed since it does not match with one currently in the list.
-	// 	const display = new Display();
-	// 	const makeChangesBtn = document.querySelector('#edit-form-btn');
-		
-	// 	makeChangesBtn.addEventListener('click', ()=>{
-			
-	// 		const selectedList = document.getElementById('edit-list').selectedOptions[0].label;
-			
-	// 		//remove todo obj from its current list
-	// 		const currentList = document.querySelector('.header__list-title').innerText;
-	// 		const todoObjTitle =  document.querySelector('#edit-title').value;
-
-	// 		for (let i = 0; i < listArray.length; i++) {
-	// 			const thisListTitle = listArray[i].title;
-
-	// 			if (thisListTitle == currentList) {
-	// 				const listTodos = listArray[i].todos
-	// 				for (let j = 0; j < listTodos.length; j++) {
-	// 					const thisTodoTitle = listTodos[j].title;
-	// 					if (thisTodoTitle == todoObjTitle) {
-	// 						
-	// 					}
-	// 				}
-	// 			}
-				
-	// 		}
-
-	// 		//let todoObj = list[i].todos[i].remove();
-
-	// 		//move todoobj to its new list
-			
-
-
-			
-			
-	// 	})
-	// }
+	
 }
 export { Conductor };

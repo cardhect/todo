@@ -1,11 +1,13 @@
 import { listArray } from "./listArrayTracker";
 import { storageAvailable } from "./storageAvailable";
 import { Display } from "./display";
+import { Conductor } from "./todoDataConductor";
 import { List } from "./createList";
 import { Todo } from "./createToDo";
 
 export function grabFromLocalStorage() {
 	let displayControl = new Display();
+	let dataCond = new Conductor();
     if (storageAvailable("localStorage")) {
         
 		// Yippee! We can use localStorage awesomeness
@@ -33,7 +35,7 @@ export function grabFromLocalStorage() {
 			//cycles through each list and todo and creates a list and todo object.
 			let savedListLen = parsedSavedArray.length-1;
 			for (let i= 0; i <= savedListLen; i++) {
-				const listElement = parsedSavedArray[i];
+			
 				const listElementName = parsedSavedArray[i].title;
 				const newList = new List(listElementName);
 				
@@ -53,7 +55,7 @@ export function grabFromLocalStorage() {
 					const todoElementPrio = todoElement.priority;
 					
 
-					const todoObj = new Todo(todoElementTitle, todoElementDate, todoElementDate, todoElementPrio);
+					const todoObj = new Todo(todoElementTitle, todoElementDesc, todoElementDate, todoElementPrio);
 
 					listArray[i].todos.push(todoObj);
 			
@@ -72,6 +74,9 @@ export function grabFromLocalStorage() {
 			
             //Updates the default list view with its tasks.
 			displayControl.displayTodo();
+			dataCond.todoEditButtonListener();
+			dataCond.removeTodo();
+			displayControl.editFormModal();
 			displayControl.displayListButtons();
 		}
 	} else {
