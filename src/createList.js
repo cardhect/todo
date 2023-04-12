@@ -10,8 +10,6 @@ class List {
     }
 
     remove(deletedTodo){
-        
-        
         for( let i = 0; i < this.todos.length; i++){ 
                                    
             if ( this.todos[i].title === deletedTodo) { 
