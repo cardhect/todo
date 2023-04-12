@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="style.css">
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 	<title>Tasc.</title>
 </head>
 
@@ -19,51 +19,55 @@
 				<button class="view-button" id="today-tasks">Today</button>
 			</div>
 			<div class="bot-btn-container">
-	    <button class="view-button" id="upcoming-tasks">Upcoming Tasks</button>
+				<button class="view-button" id="upcoming-tasks">Upcoming Tasks</button>
 				<button class="view-button" id="prio-tasks">Important</button>
 			</div>
 		</div>
 		<div class="list-view">
-			<h3 id="lists-all-names">Lists</h3>
-			<div class="list__container">
-
+			<div>
+				<h3 id="lists-all-names">Lists</h3>
+				<div class="list__container">
+				</div>
 			</div>
+
+			<div class="add-list"></div>
 		</div>
-		<div class="add-list"></div>
 	</div>
 	<div class="right-box">
-		<div class="header" id="list-view-title">
-			<h1 class="header__list-title">Todo</h1>
-			<h2 id="header__todo-amount">0</h2>
-		</div>
-		<div class="todo-view">
+		<div>
+			<div class="header" id="list-view-title">
+				<h1 class="header__list-title">Todo</h1>
+				<h2 id="header__todo-amount">0</h2>
+			</div>
+			<div class="todo-view">
+			</div>
 		</div>
 		<div class="add-todo-container">
 			<p>Add todo</p>
 			<button class="todo-form-modal">+</button>
 		</div>
 	</div>
-</div>
+	</div>
 	<!-- Create todo Form Modal -->
-<div id="myModal" class="modal">
+	<div id="myModal" class="modal">
 
-	<!-- Modal content -->
-	<div class="modal-content">
-	  <span class="close">&times;</span>
+		<!-- Modal content -->
+		<div class="modal-content">
+			<span class="close">&times;</span>
+		</div>
+
 	</div>
-  
-  </div>
 
-  	<!-- Edit Form Modal -->
-<div id="edit-modal" class="modal">
+	<!-- Edit Form Modal -->
+	<div id="edit-modal" class="modal">
 
-	<!-- Modal content -->
-	<div class="edit-modal-content">
-	  <span class="edit-close">&times;</span>
+		<!-- Modal content -->
+		<div class="edit-modal-content">
+			<span class="edit-close">&times;</span>
+		</div>
+
 	</div>
-  
-  </div>
 </body>
 <script src="main.js"></script>
 
-</html> 
+</html>

@@ -1,6 +1,5 @@
 body {
     background-color: rgb(77, 77, 77);
-    overflow: hidden;
     display: flex;
     flex-wrap: wrap;
     margin: 0;
@@ -56,9 +55,9 @@ button:hover{
     width: 30%;
     background-color: rgb(128, 128, 128);
     height: 100vh;
+    overflow: auto;
 }
 .box__container {
-    height: 40%;
     background-color: rgb(49, 101, 197);
     margin: 10px;
     display: flex;
@@ -79,12 +78,12 @@ button:hover{
 
 
 .list-view {
-    height: 43%;
+    height: 49%;
     /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     margin: 5px;
+    justify-content: space-between;
 }
 
 .list__container {
@@ -107,6 +106,10 @@ button:hover{
     width: 70%;
     background-color: rgb(48, 48, 48);
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: auto;
 }
 
 .header {
@@ -123,7 +126,7 @@ button:hover{
 
 
 .todo-view {
-    height: 86%;
+    height: auto;
     width: auto;
     /* border: 1px solid red; */
     overflow-y:auto
@@ -255,8 +258,8 @@ button:hover{
 
 /* View Buttons  */
 .view-button {
-    width: 145px;
-    height: 145px;
+    width: 100px;
+    height: 100px;
     margin: 5px;
     border-radius: 20px;
     box-shadow: none;
