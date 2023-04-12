@@ -17,15 +17,24 @@
   "bugs": {
     "url": "https://github.com/cardhect/todo/issues"
   },
-  "homepage": "https://github.com/cardhect/todo#readme",
+  "homepage": "https://github.com/cardhect/todo",
   "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "babel-loader": "^9.1.0",
+    "css-loader": "^6.7.3",
     "eslint": "^8.26.0",
+<<<<<<< HEAD
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "webpack": "^5.74.0",
+=======
+    "webpack": "^5.75.0",
+>>>>>>> 32d58051e3af4577801e9b55b1a990a136a217a6
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.20.7",
     "date-fns": "^2.29.1"
   }
 }
