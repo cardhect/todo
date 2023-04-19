@@ -1,1 +1,6 @@
-//BUG todoDataConductor.js:210 Uncaught TypeError: Cannot read properties of undefined (reading '2')
+//TODO Delete btn not working on every display section
+//Note: Delete button throws error when on a different view other than list because code trys to access the list through the name of the todo view title
+//Possible Fix: Add list prop to todo obj and access it that way.
+
+//BUG When todo is deleted in a view or corresponding list it still shows in other views
+//Possible fix, make each list view button access the todos each time and update accordilingt 

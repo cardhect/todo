@@ -39,5 +39,4 @@ display.displayPrioTasks();
 
 
 
-//* BUG lists retrieved from local storage does not appear in the list options drop down in the add todo modal.
 

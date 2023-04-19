@@ -46,12 +46,15 @@ export function grabFromLocalStorage() {
 					const todoElementDate = todoElement.dueDate;
 
 					const todoElementPrio = todoElement.priority;
-
+					
+					const todoElementList = todoElement.list;
+					
 					const todoObj = new Todo(
 						todoElementTitle,
 						todoElementDesc,
 						todoElementDate,
-						todoElementPrio
+						todoElementPrio,
+						todoElementList
 					);
 
 					listArray[i].todos.push(todoObj);
@@ -61,7 +64,9 @@ export function grabFromLocalStorage() {
 			//Updates the default list view with its tasks.
 			displayControl.displayTodo();
 			dataCond.todoEditButtonListener();
-			dataCond.removeTodo();
+			//BUG This adds 2 event listeners on todo delete buttons
+			//dataCond.removeTodo();
+			
 			displayControl.editFormModal();
 			displayControl.displayListButtons();
 		}

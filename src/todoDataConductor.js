@@ -36,10 +36,8 @@ class Conductor {
 			formatedDate = '';
 			
 		}
-		// 
-
-
-
+		
+		
 		let priority;
 		var ele = document.getElementsByName("priority");
 
@@ -53,7 +51,7 @@ class Conductor {
 
 		//grab selected list and create todoObj
 		const list = document.getElementById("list").value;
-		const todoObj = new Todo(title, description, formatedDate, priority);
+		const todoObj = new Todo(title, description, formatedDate, priority,list);
 
 		//Pushes todo to array
 		self.todoData.push(todoObj);
@@ -207,16 +205,20 @@ class Conductor {
 		const todoView = document.querySelector(".todo-view");
 		for (let index = 0; index < deleteButtons.length; index++) {
 			deleteButtons[index].addEventListener("click", (event) => {
-				const todoElement = event.path[2];
+				const todoElement = event.target.parentNode.parentNode;
 				
 				
 				todoView.removeChild(todoElement);
 
 				//removes the todo from its list.
-				const deletedTodo =event.path[2].firstChild.childNodes[0].innerText;
+				const deletedTodo = event.target.parentElement.parentElement.children[0].children[0].innerText;
+				
 				const listTitle = document.querySelector(
 					".header__list-title"
 				).textContent;
+				//Check this out hector
+				// const todoList = 
+
 				for (let i = 0; i < listArray.length; i++) {
 					const listToRemoveFrom = listArray[i];
 					if (listTitle == listArray[i].title) {

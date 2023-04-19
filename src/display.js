@@ -133,7 +133,7 @@ class Display {
 				self.displayTodo();
 				self.editFormModal();
 				dataCond.todoEditButtonListener();
-				dataCond.removeTodo();
+				// dataCond.removeTodo();
 				self.formReset();
 			} else {
 				self.formReset();
@@ -306,7 +306,7 @@ class Display {
 	// }
 
 	displayListButtons() {
-		dataCond.removeTodo();
+		// dataCond.removeTodo();
 		//Displays default Capture list in list view.
 		const listContainer = document.querySelector(".list__container");
 		
@@ -423,7 +423,7 @@ class Display {
 		// this.displayTodoAmount();
 		this.displayTodo();
 		dataCond.todoEditButtonListener();
-		dataCond.removeTodo();
+		// dataCond.removeTodo();
 	}
 	
 	removeFromArray = (e) => {
@@ -535,6 +535,7 @@ class Display {
 				}
 			}
 		}
+	    dataCond.removeTodo();
 		this.displayTodoAmount();
 	}
 	
@@ -662,15 +663,15 @@ class Display {
 					const description = document.createElement("p");
 					const dueDate = document.createElement("p");
 					const priority = document.createElement("p");
-					const edit = document.createElement("button");
-					const deleteTodo = document.createElement("button");
+					// const edit = document.createElement("button");
+					// const deleteTodo = document.createElement("button");
 					
 					title.textContent = thisList.todos[j].title;
 					description.textContent = thisList.todos[j].description;
 					dueDate.textContent = thisList.todos[j].dueDate;
 					priority.textContent = thisList.todos[j].priority;
-					edit.textContent = "Edit";
-					deleteTodo.textContent = "Delete";
+					// // edit.textContent = "Edit";
+					// deleteTodo.textContent = "Delete";
 					// Container Attributes
 					todoContainer.setAttribute("class", "todo-obj");
 					todoTopDiv.setAttribute("class", "todo-top-div");
@@ -680,24 +681,24 @@ class Display {
 					description.setAttribute("class", "todo-items todo-desc");
 					dueDate.setAttribute("class", "todo-items todo-duedate");
 					priority.setAttribute("class", "todo-items todo-priority");
-					edit.setAttribute("class", "todo-items todo-edit");
-					deleteTodo.setAttribute("class", "todo-items todo-delete");
+					// // edit.setAttribute("class", "todo-items todo-edit");
+					// deleteTodo.setAttribute("class", "todo-items todo-delete");
 					
 					todoTopDiv.append(title);
 					todoTopDiv.append(priority);
 					todoBotDiv.append(dueDate);
 					todoBotDiv.append(description);
-					todoBotDiv.append(edit);
-					todoBotDiv.append(deleteTodo);
+					// todoBotDiv.append(edit);
+				    //todoBotDiv.append(deleteTodo);
 					
 					todoContainer.append(todoTopDiv);
 					todoContainer.append(todoBotDiv);
 					
 					todoView.append(todoContainer);
 				}
+				dataCond.removeTodo();
 			}
 		});
-		dataCond.removeTodo();
 	}
 	
 	displayTodoTasks(todoArray) {
@@ -714,15 +715,15 @@ class Display {
 			const description = document.createElement("p");
 			const dueDate = document.createElement("p");
 			const priority = document.createElement("p");
-			const edit = document.createElement("button");
-			const deleteTodo = document.createElement("button");
+			// const edit = document.createElement("button");
+			// const deleteTodo = document.createElement("button");
 			
 			title.textContent = todoArray[j].title;
 			description.textContent = todoArray[j].description;
 			dueDate.textContent = todoArray[j].dueDate;
 			priority.textContent = todoArray[j].priority;
-			edit.textContent = "Edit";
-			deleteTodo.textContent = "Delete";
+			// // edit.textContent = "Edit";
+			// deleteTodo.textContent = "Delete";
 			// Container Attributes
 			todoContainer.setAttribute("class", "todo-obj");
 			todoTopDiv.setAttribute("class", "todo-top-div");
@@ -732,15 +733,15 @@ class Display {
 			description.setAttribute("class", "todo-items todo-desc");
 			dueDate.setAttribute("class", "todo-items todo-duedate");
 			priority.setAttribute("class", "todo-items todo-priority");
-			edit.setAttribute("class", "todo-items todo-edit");
-			deleteTodo.setAttribute("class", "todo-items todo-delete");
+			// // edit.setAttribute("class", "todo-items todo-edit");
+			// deleteTodo.setAttribute("class", "todo-items todo-delete");
 			
 			todoTopDiv.append(title);
 			todoTopDiv.append(priority);
 			todoBotDiv.append(dueDate);
 			todoBotDiv.append(description);
-			todoBotDiv.append(edit);
-			todoBotDiv.append(deleteTodo);
+			// todoBotDiv.append(edit);
+			// todoBotDiv.append(deleteTodo);
 			
 			todoContainer.append(todoTopDiv);
 			todoContainer.append(todoBotDiv);
@@ -748,7 +749,7 @@ class Display {
 			todoView.append(todoContainer);
 			this.updateTodoCounter();
 		}
-		dataCond.removeTodo();
+		// dataCond.removeTodo();
 	}
 	
 	displayUpcomingTasks() {
@@ -807,15 +808,15 @@ class Display {
 					const description = document.createElement("p");
 					const dueDate = document.createElement("p");
 				const priority = document.createElement("p");
-				const edit = document.createElement("button");
-				const deleteTodo = document.createElement("button");
+				// const edit = document.createElement("button");
+				// const deleteTodo = document.createElement("button");
 				
 				title.textContent = newTodoArray[j].title;
 				description.textContent = newTodoArray[j].description;
 				dueDate.textContent = newTodoArray[j].dueDate;
 				priority.textContent = newTodoArray[j].priority;
-				edit.textContent = "Edit";
-				deleteTodo.textContent = "Delete";
+				// // edit.textContent = "Edit";
+				// deleteTodo.textContent = "Delete";
 				// Container Attributes
 				todoContainer.setAttribute("class", "todo-obj");
 				todoTopDiv.setAttribute("class", "todo-top-div");
@@ -825,15 +826,15 @@ class Display {
 				description.setAttribute("class", "todo-items todo-desc");
 				dueDate.setAttribute("class", "todo-items todo-duedate");
 				priority.setAttribute("class", "todo-items todo-priority");
-				edit.setAttribute("class", "todo-items todo-edit");
-				deleteTodo.setAttribute("class", "todo-items todo-delete");
+				// // edit.setAttribute("class", "todo-items todo-edit");
+				// deleteTodo.setAttribute("class", "todo-items todo-delete");
 				
 				todoTopDiv.append(title);
 				todoTopDiv.append(priority);
 				todoBotDiv.append(dueDate);
 				todoBotDiv.append(description);
-				todoBotDiv.append(edit);
-				todoBotDiv.append(deleteTodo);
+				// todoBotDiv.append(edit);
+				// todoBotDiv.append(deleteTodo);
 				
 				todoContainer.append(todoTopDiv);
 				todoContainer.append(todoBotDiv);
@@ -844,7 +845,7 @@ class Display {
 			this.updateTodoCounter();
 			
 		});
-		dataCond.removeTodo();
+		// dataCond.removeTodo();
 	}
 	
 	displayTodayTasks() {
@@ -880,7 +881,7 @@ class Display {
 			
 			this.updateTodoCounter();
 		});
-		dataCond.removeTodo();
+		// dataCond.removeTodo();
 	}
 
 	displayPrioTasks() {
@@ -924,7 +925,7 @@ class Display {
 			headerCounter.innerText = count;
 	}
 }
-dataCond.removeTodo();
+// dataCond.removeTodo();
 export { Display };
 
 
