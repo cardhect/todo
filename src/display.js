@@ -924,6 +924,17 @@ class Display {
 
 			headerCounter.innerText = count;
 	}
+
+	mobileSideMenuBtn() {
+		const menuBtn = document.querySelector('.mobile-btn');
+		const leftSideContainer = document.querySelector('.left-box-container');
+		const toggleSideMenuClass = 'side-menu-transition';
+
+		menuBtn.addEventListener('click', () => {
+			console.log('I was clicked.');
+			leftSideContainer.classList.toggle(toggleSideMenuClass);
+		})
+	}
 }
 // dataCond.removeTodo();
 export { Display };

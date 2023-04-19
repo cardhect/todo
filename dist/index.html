@@ -7,32 +7,38 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="stylesheet" href="style.css">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<title>Tasc.</title>
 </head>
 
 <body>
-	<div class="left-box">
-		<div id="app-name">Tasc.</div>
-		<div class="box__container">
-			<div class="top-btn-container">
-				<button class="view-button" id="all-tasks">All Tasks</button>
-				<button class="view-button" id="today-tasks">Today</button>
-			</div>
-			<div class="bot-btn-container">
-				<button class="view-button" id="upcoming-tasks">Upcoming Tasks</button>
-				<button class="view-button" id="prio-tasks">Important</button>
-			</div>
-		</div>
-		<div class="list-view">
-			<div>
-				<h3 id="lists-all-names">Lists</h3>
-				<div class="list__container">
+	<div class="left-box-container">
+		<div class="left-box">
+			<div id="app-name">Tasc.</div>
+			<div class="box__container">
+				<div class="top-btn-container">
+					<button class="view-button" id="all-tasks">All Tasks</button>
+					<button class="view-button" id="today-tasks">Today</button>
+				</div>
+				<div class="bot-btn-container">
+					<button class="view-button" id="upcoming-tasks">Upcoming Tasks</button>
+					<button class="view-button" id="prio-tasks">Important</button>
 				</div>
 			</div>
-
-			<div class="add-list"></div>
+			<div class="list-view">
+				<div>
+					<h3 id="lists-all-names">Lists</h3>
+					<div class="list__container">
+					</div>
+				</div>
+	
+				<div class="add-list"></div>
+			</div>
 		</div>
+		
+		<button class="mobile-btn"><i class="fa fa-bars"></i></button>
 	</div>
+
 	<div class="right-box">
 		<div>
 			<div class="header" id="list-view-title">

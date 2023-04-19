@@ -52,7 +52,6 @@ button:hover{
 }
 
 .left-box {
-    width: 30%;
     background-color: rgb(128, 128, 128);
     height: 100vh;
     overflow: auto;
@@ -192,7 +191,7 @@ button:hover{
     background-color: rgb(169, 206, 255) ;
     margin: auto;
     padding: 20px;
-    width: 25%;
+    width: fit-content;
     display: flex;
     justify-content: center;
     border-radius: 20px;
@@ -296,3 +295,43 @@ button:hover{
 
 }
 
+.left-box-container {
+    width: 30%;
+}
+.mobile-btn {
+    display: none;
+}
+
+
+/* Mobile CSS */
+@media only screen and (max-width: 1000px) {
+    .left-box {
+        z-index: 100;
+    }
+    .mobile-btn {
+        /* transform: translate(-315px, 0px); */
+        z-index: 99;
+    }
+    .right-box {
+        width: 100%;
+        position: absolute;
+    }
+    .mobile-btn {
+        display: block;
+    }    
+    .left-box-container {
+        transform: translate(-315px, 0px);
+        transition: transform 1s;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        z-index: 99;
+        width: auto;
+    }
+
+    .side-menu-transition {
+        transform: translate(0px,0px);
+        transition: transform 1s;
+    }
+}

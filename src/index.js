@@ -37,6 +37,7 @@ display.displayUpcomingTasks();
 display.displayTodayTasks();
 display.displayPrioTasks();
 
+display.mobileSideMenuBtn();
 
 
 
